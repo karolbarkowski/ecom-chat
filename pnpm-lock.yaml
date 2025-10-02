@@ -32,6 +32,9 @@ importers:
       dotenv:
         specifier: 16.4.7
         version: 16.4.7
+      fast-xml-parser:
+        specifier: ^5.2.5
+        version: 5.2.5
       graphql:
         specifier: ^16.8.1
         version: 16.11.0

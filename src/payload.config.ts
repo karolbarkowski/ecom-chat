@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Users } from './payload/collections/Users'
 import { Products } from './payload/collections/Products'
+import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImportsAdmin'
+import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,6 +22,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Products],
+  globals: [ProductImportsAdmin, EmbeddingsAdmin],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

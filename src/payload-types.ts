@@ -68,7 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    media: Media;
+    products: Product;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -76,7 +76,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -139,22 +139,31 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "products".
  */
-export interface Media {
+export interface Product {
   id: string;
-  alt: string;
+  title: string;
+  category?: string | null;
+  manufacturer?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  colorPicker?: string | null;
+  url?: string | null;
+  price: number;
+  pricePrevious?: number | null;
+  description?: string | null;
+  color?: string | null;
+  mediaImages?:
+    | {
+        url: string;
+        isMain: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  embedding?: number[] | null;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -168,8 +177,8 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'products';
+        value: string | Product;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -237,21 +246,30 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "products_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+export interface ProductsSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  manufacturer?: T;
+  slug?: T;
+  slugLock?: T;
+  colorPicker?: T;
+  url?: T;
+  price?: T;
+  pricePrevious?: T;
+  description?: T;
+  color?: T;
+  mediaImages?:
+    | T
+    | {
+        url?: T;
+        isMain?: T;
+        id?: T;
+      };
+  embedding?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

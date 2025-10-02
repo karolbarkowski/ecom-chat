@@ -1,0 +1,20 @@
+.color-picker-component {
+
+
+  .color-selection-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+    .color-swatch {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px transparent;
+
+      &.selected {
+        border: 3px solid white;
+      }
+    }
+  }
+}

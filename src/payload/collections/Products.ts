@@ -14,29 +14,21 @@ export const Products: CollectionConfig = {
       required: true,
     },
     {
-      name: 'category',
-      type: 'text',
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'manufacturer',
-      type: 'text',
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    ...slugField(),
-    colorPickerField,
-    {
       type: 'tabs',
       tabs: [
         {
           label: 'Product Details',
           fields: [
             {
+              name: 'erpId',
+              type: 'text',
+            },
+            {
               name: 'url',
+              type: 'text',
+            },
+            {
+              name: 'color',
               type: 'text',
             },
             {
@@ -45,16 +37,16 @@ export const Products: CollectionConfig = {
               required: true,
             },
             {
+              name: 'quantity',
+              type: 'number',
+            },
+            {
               name: 'pricePrevious',
               type: 'number',
             },
             {
               name: 'description',
               type: 'textarea',
-            },
-            {
-              name: 'color',
-              type: 'text',
             },
             {
               name: 'mediaImages',
@@ -88,5 +80,20 @@ export const Products: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'category',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'manufacturer',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    ...slugField(),
   ],
 }

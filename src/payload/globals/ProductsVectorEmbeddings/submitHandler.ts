@@ -1,8 +1,29 @@
 'use server'
 
-import { Embed } from '@/services/ai'
 import config from '@payload-config'
 import { getPayload } from 'payload'
+import { FeatureExtractionPipeline, pipeline } from '@xenova/transformers'
+import { Product } from '@/payload-types'
+
+async function generateEmbedding(embedder: FeatureExtractionPipeline, text: string): Promise {
+  const output = await embedder(text, {
+    pooling: 'mean',
+    normalize: true,
+  })
+  return Array.from(output.data)
+}
+
+function productToEmbeddingText(product: Product): string {
+  const parts = [
+    product.title,
+    product.description,
+    product.category,
+    product.manufacturer,
+    product.color,
+  ].filter(Boolean) // Remove undefined values
+
+  return parts.join(' ')
+}
 
 export async function submitData() {
   const payload = await getPayload({ config })
@@ -12,20 +33,18 @@ export async function submitData() {
     limit: 1000,
   })
 
-  for (const product of products.docs) {
-    const text = `
-      Nazwa: ${product.title},
-      Opis: ${product.description},
-      Kolor: ${product.color},
-      Cena: ${product.price},
-    `
+  const embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2')
+  console.log('Generating embeddings for products...')
 
-    const embeddings = await Embed(text, 'search_document')
+  for (const product of products.docs) {
+    const dataToEmbed = productToEmbeddingText(product)
+    const embedding = await generateEmbedding(embedder, dataToEmbed)
+
     await payload.update({
       collection: 'products',
       id: product.id,
       data: {
-        embedding: embeddings,
+        embedding: embedding,
       },
     })
   }

@@ -150,16 +150,13 @@ export interface User {
 export interface Product {
   id: string;
   title: string;
-  category?: string | null;
-  manufacturer?: string | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  colorPicker?: string | null;
+  erpId?: string | null;
   url?: string | null;
+  color?: string | null;
   price: number;
+  quantity?: number | null;
   pricePrevious?: number | null;
   description?: string | null;
-  color?: string | null;
   mediaImages?:
     | {
         url: string;
@@ -168,6 +165,10 @@ export interface Product {
       }[]
     | null;
   embedding?: number[] | null;
+  category?: string | null;
+  manufacturer?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -256,16 +257,13 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
-  category?: T;
-  manufacturer?: T;
-  slug?: T;
-  slugLock?: T;
-  colorPicker?: T;
+  erpId?: T;
   url?: T;
+  color?: T;
   price?: T;
+  quantity?: T;
   pricePrevious?: T;
   description?: T;
-  color?: T;
   mediaImages?:
     | T
     | {
@@ -274,6 +272,10 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   embedding?: T;
+  category?: T;
+  manufacturer?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }

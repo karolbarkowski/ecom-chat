@@ -1,4 +1,4 @@
-const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
+export const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
   if (vecA.length !== vecB.length) {
     throw new Error('Vectors must have the same length')
   }

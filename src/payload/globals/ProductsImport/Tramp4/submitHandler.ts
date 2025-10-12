@@ -5,6 +5,7 @@ import { Tramp4Import } from './types'
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { parseFile } from '@/payload/utilities/xml'
+import { decodeHTMLEntities } from '@/services/html'
 
 type ProductUpsert = Omit<Product, 'createdAt' | 'updatedAt' | 'id' | 'slug'>
 
@@ -29,7 +30,7 @@ export async function submitData() {
           update: {
             erpId: _erpId,
             title: p.name,
-            description: p.description,
+            description: decodeHTMLEntities(p.description),
             quantity: parseFloat(p.availability),
             url: props.url,
             color: props.color,

@@ -164,23 +164,3 @@ function sanitizeFilterResult(result: any, originalQuery: string): FilterExtract
     semantic_query,
   }
 }
-
-/**
- * Utility to check if Ollama is running and model is available
- */
-export async function checkLlmHealth(): Promise<boolean> {
-  try {
-    const models = await ollama.list()
-    const isLlamaHostingModel = models.models.some((m) => m.name.includes(LLM_MODEL))
-
-    if (!isLlamaHostingModel) {
-      console.error(`${LLM_MODEL} model not found. Run: ollama pull ${LLM_MODEL}`)
-      return false
-    }
-
-    return true
-  } catch (error) {
-    console.error('Ollama not running. Start it with: ollama serve')
-    return false
-  }
-}

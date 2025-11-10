@@ -1,5 +1,7 @@
 import ollama from 'ollama'
 
+const LLM_MODEL = 'deepseek-r1:1.5b'
+
 /**
  * Extracted filters from user query
  */
@@ -55,7 +57,7 @@ export async function extractFilters(userQuery: string): Promise<FilterExtractio
 
   try {
     const response = await ollama.chat({
-      model: 'llama3.1:8b',
+      model: LLM_MODEL,
       messages: [
         {
           role: 'system',
@@ -166,13 +168,13 @@ function sanitizeFilterResult(result: any, originalQuery: string): FilterExtract
 /**
  * Utility to check if Ollama is running and model is available
  */
-export async function checkOllamaHealth(): Promise<boolean> {
+export async function checkLlmHealth(): Promise<boolean> {
   try {
     const models = await ollama.list()
-    const hasLlama = models.models.some((m) => m.name.includes('llama3.1'))
+    const isLlamaHostingModel = models.models.some((m) => m.name.includes(LLM_MODEL))
 
-    if (!hasLlama) {
-      console.error('Llama 3.1 model not found. Run: ollama pull llama3.1:8b')
+    if (!isLlamaHostingModel) {
+      console.error(`${LLM_MODEL} model not found. Run: ollama pull ${LLM_MODEL}`)
       return false
     }
 

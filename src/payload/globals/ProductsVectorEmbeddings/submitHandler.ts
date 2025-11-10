@@ -2,7 +2,7 @@
 
 import config from '@payload-config'
 import { getPayload } from 'payload'
-import { generateEmbedding, productToEmbeddingText } from '@/services/embedding'
+import { productToEmbeddingAsync } from '@/workflows/product-to-embedding'
 
 export async function submitData() {
   const payload = await getPayload({ config })
@@ -13,8 +13,7 @@ export async function submitData() {
   })
 
   for (const product of products.docs) {
-    const dataToEmbed = productToEmbeddingText(product)
-    const embedding = await generateEmbedding(dataToEmbed)
+    const embedding = await productToEmbeddingAsync(product)
 
     await payload.update({
       collection: 'products',

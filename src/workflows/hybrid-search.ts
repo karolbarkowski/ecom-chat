@@ -1,6 +1,22 @@
-import { generateEmbedding } from './embedding'
-import { ProductFilters } from './filter-extraction'
-import { getDatabase } from './mongo-client'
+import { textToEmbedding } from '@/services/embedding'
+import { extractFilters, ProductFilters } from '@/services/filter-extraction'
+import { getDatabase } from '@/services/mongo-client'
+import { escapeRegex } from '@/services/regex'
+
+/**
+ * Hybrid search configuration
+ */
+export interface HybridSearchConfig {
+  indexName?: string // Vector search index name
+  numCandidates?: number // Number of candidates for vector search
+  limit?: number // Maximum results to return
+}
+
+const DEFAULT_CONFIG: Required<HybridSearchConfig> = {
+  indexName: 'vector_index',
+  numCandidates: 100,
+  limit: 5,
+}
 
 /**
  * Product search result with similarity score
@@ -21,44 +37,19 @@ export interface ProductSearchResult {
   discount?: number // Percentage discount if on sale
 }
 
-/**
- * Hybrid search configuration
- */
-export interface HybridSearchConfig {
-  indexName?: string // Vector search index name
-  numCandidates?: number // Number of candidates for vector search
-  limit?: number // Maximum results to return
-}
-
-const DEFAULT_CONFIG: Required<HybridSearchConfig> = {
-  indexName: 'vector_index',
-  numCandidates: 100,
-  limit: 5,
-}
-
-/**
- * Perform hybrid search combining vector similarity and structured filters
- * @param semanticQuery - Text query for vector search
- * @param filters - Structured filters from filter extraction
- * @param config - Search configuration
- * @returns Array of matching products with scores
- */
-export async function hybridSearch(
-  semanticQuery: string,
-  filters: ProductFilters,
+export async function performHybridSearch(
+  query: string,
   config: HybridSearchConfig = {},
 ): Promise<ProductSearchResult[]> {
-  const searchConfig = { ...DEFAULT_CONFIG, ...config }
+  const filters = await extractFilters(query)
 
-  // Step 1: Generate embedding for the semantic query
-  const queryEmbedding = await generateEmbedding(semanticQuery)
-
-  // Step 2: Build filter conditions for MongoDB
-  const filterConditions = buildFilterConditions(filters)
+  const queryEmbedding = await textToEmbedding(filters.semantic_query)
+  const mongoFilters = buildFilterConditions(filters.filters)
 
   // Step 3: Execute vector search with filters
   const db = await getDatabase()
   const productsCollection = db.collection('products')
+  const searchConfig = { ...DEFAULT_CONFIG, ...config }
 
   const pipeline: any[] = [
     {
@@ -68,8 +59,8 @@ export async function hybridSearch(
         queryVector: queryEmbedding,
         numCandidates: searchConfig.numCandidates,
         limit: searchConfig.limit,
-        ...(filterConditions.length > 0 && {
-          filter: { $and: filterConditions },
+        ...(mongoFilters.length > 0 && {
+          filter: { $and: mongoFilters },
         }),
       },
     },
@@ -92,7 +83,6 @@ export async function hybridSearch(
 
   const results = await productsCollection.aggregate(pipeline).toArray()
 
-  // Step 4: Enrich results with computed fields
   return results.map((doc) => enrichProductResult(doc))
 }
 
@@ -144,13 +134,6 @@ function buildFilterConditions(filters: ProductFilters): any[] {
 }
 
 /**
- * Escape special regex characters
- */
-function escapeRegex(str: string): string {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-/**
  * Enrich product result with computed fields
  */
 function enrichProductResult(doc: any): ProductSearchResult {
@@ -181,37 +164,4 @@ function enrichProductResult(doc: any): ProductSearchResult {
   }
 
   return result
-}
-
-/**
- * Get product statistics for debugging
- */
-export async function getProductStats() {
-  const db = await getDatabase()
-  const productsCollection = db.collection('products')
-
-  const totalProducts = await productsCollection.countDocuments()
-  const withEmbeddings = await productsCollection.countDocuments({
-    embedding: { $exists: true, $ne: null },
-  })
-
-  const categories = await productsCollection
-    .aggregate([{ $group: { _id: '$category', count: { $sum: 1 } } }, { $sort: { count: -1 } }])
-    .toArray()
-
-  const manufacturers = await productsCollection
-    .aggregate([
-      { $group: { _id: '$manufacturer', count: { $sum: 1 } } },
-      { $sort: { count: -1 } },
-      { $limit: 10 },
-    ])
-    .toArray()
-
-  return {
-    totalProducts,
-    withEmbeddings,
-    embeddingCoverage: ((withEmbeddings / totalProducts) * 100).toFixed(1) + '%',
-    topCategories: categories.slice(0, 5),
-    topManufacturers: manufacturers,
-  }
 }

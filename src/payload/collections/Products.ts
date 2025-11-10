@@ -1,6 +1,5 @@
 import { CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
-import { colorPickerField } from '../fields/colorPicker'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -20,10 +19,6 @@ export const Products: CollectionConfig = {
           label: 'Product Details',
           fields: [
             {
-              name: 'erpId',
-              type: 'text',
-            },
-            {
               name: 'url',
               type: 'text',
             },
@@ -35,10 +30,6 @@ export const Products: CollectionConfig = {
               name: 'price',
               type: 'number',
               required: true,
-            },
-            {
-              name: 'quantity',
-              type: 'number',
             },
             {
               name: 'pricePrevious',

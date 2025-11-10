@@ -1,7 +1,7 @@
 import { textToEmbedding } from '@/services/embedding'
 import { extractFilters, ProductFilters } from '@/services/filter-extraction'
-import { getDatabase } from '@/services/mongo-client'
-import { escapeRegex } from '@/services/regex'
+import { getDatabase } from '@/payload/utilities/mongo-client'
+import { escapeRegex } from '@/payload/utilities/regex'
 
 /**
  * Hybrid search configuration
@@ -83,7 +83,8 @@ export async function performHybridSearch(
 
   const results = await productsCollection.aggregate(pipeline).toArray()
 
-  return results.map((doc) => enrichProductResult(doc))
+  const products = results.map((doc) => enrichProductResult(doc))
+  return products
 }
 
 /**

@@ -150,11 +150,9 @@ export interface User {
 export interface Product {
   id: string;
   title: string;
-  erpId?: string | null;
   url?: string | null;
   color?: string | null;
   price: number;
-  quantity?: number | null;
   pricePrevious?: number | null;
   description?: string | null;
   mediaImages?:
@@ -257,11 +255,9 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
-  erpId?: T;
   url?: T;
   color?: T;
   price?: T;
-  quantity?: T;
   pricePrevious?: T;
   description?: T;
   mediaImages?:

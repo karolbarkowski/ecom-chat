@@ -6,7 +6,7 @@ import React, { useTransition } from 'react'
 import { Button } from '@payloadcms/ui'
 import { submitData } from './submitHandler'
 
-const Tramp4ImportUI = () => {
+const SheinImportUI = () => {
   const [isPending, startTransition] = useTransition()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,20 +19,12 @@ const Tramp4ImportUI = () => {
 
   return (
     <div className="flex flex-row">
-      <img
-        className="image"
-        src="/data/Tramp4.logo.png"
-        width={130}
-        height={30}
-        alt="Tramp4 Logo"
-      />
-
       <form onSubmit={handleSubmit}>
-        <Button type="submit">Import</Button>
+        <Button type="submit">Import Shein dataset</Button>
         {isPending && <p>Loading...</p>}
       </form>
     </div>
   )
 }
 
-export default Tramp4ImportUI
+export default SheinImportUI

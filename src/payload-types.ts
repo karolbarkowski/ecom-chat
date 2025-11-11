@@ -160,7 +160,7 @@ export interface Product {
   mediaImages?:
     | {
         url: string;
-        isMain: boolean;
+        order: number;
         id?: string | null;
       }[]
     | null;
@@ -283,7 +283,7 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         url?: T;
-        isMain?: T;
+        order?: T;
         id?: T;
       };
   embedding?: T;

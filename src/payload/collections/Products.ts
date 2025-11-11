@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
+import { mediaImagesField } from '../fields/mediaImageSelector'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -39,24 +40,7 @@ export const Products: CollectionConfig = {
               name: 'description',
               type: 'textarea',
             },
-            {
-              name: 'mediaImages',
-              label: 'Images',
-              type: 'array',
-              fields: [
-                {
-                  name: 'url',
-                  type: 'text',
-                  required: true,
-                },
-                {
-                  name: 'isMain',
-                  type: 'checkbox',
-                  required: true,
-                  defaultValue: false,
-                },
-              ],
-            },
+            ...mediaImagesField(),
           ],
         },
         {

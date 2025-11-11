@@ -25,7 +25,9 @@ export default async function ProductDetailsPage({
   }
 
   // Calculate discount savings
-  const savings = product.pricePrevious ? product.pricePrevious - product.price : 0
+  const savings = product.pricePrevious
+    ? Math.round((product.pricePrevious - product.price) * 100) / 100
+    : 0
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -60,10 +62,16 @@ export default async function ProductDetailsPage({
             <span className="text-3xl font-bold bg-linear-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               ${product.price}
             </span>
-            <span className="text-xl text-slate-500 line-through">${product.pricePrevious}</span>
-            <span className="bg-linear-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-              Save ${savings.toFixed(2)}
-            </span>
+            {savings > 0 ? (
+              <>
+                <span className="text-xl text-slate-500 line-through">
+                  ${product.pricePrevious}
+                </span>
+                <span className="bg-linear-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  Save ${savings.toFixed(2)}
+                </span>
+              </>
+            ) : null}
           </div>
 
           {/* Product Description */}

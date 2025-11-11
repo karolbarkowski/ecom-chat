@@ -1,21 +1,33 @@
-import { headers as getHeaders } from 'next/headers.js'
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { getPayload } from 'payload'
 import React from 'react'
 
 import config from '@/payload.config'
 
 export default async function HomePage() {
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+
+  const result = await payload.find({
+    collection: 'products',
+    limit: 100,
+  })
+  const products = result.docs
 
   return (
-    <div className="home">
-      <div className="content">
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Products</h2>
+        <div className="flex flex-col gap-6">
+          {products.map((product) => (
+            <a key={product.id} href={`product/${product.slug}`} className="flex flex-row gap-2">
+              <img src={product.mediaImages?.[0].url} width={40} />
+              {product.title}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   )
 }

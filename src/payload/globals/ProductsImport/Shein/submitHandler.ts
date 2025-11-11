@@ -58,7 +58,12 @@ export async function submitData() {
           color: row.color,
           price: parseFloat(row.final_price) || 0,
           pricePrevious: parseFloat(row.initial_price) || undefined,
-          description: row.description,
+          description: row.description
+            .replace('Free Returns', '')
+            .replace('Free Shipping', '')
+            .replace('✓.', '')
+            .replace('✓', '')
+            .trim(),
           mediaImages: mediaImages,
           category: row.category,
           manufacturer: row.brand,

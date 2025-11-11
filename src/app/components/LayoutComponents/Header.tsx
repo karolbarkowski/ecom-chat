@@ -7,7 +7,7 @@ export const LayoutHeader: React.FC = async () => {
   const payload = await getPayload({ config: payloadConfig })
 
   return (
-    <header className="bg-white">
+    <header className="bg-white dark:bg-gray-900">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
         <a className="block text-teal-600" href="#">
           <span className="sr-only">Home</span>

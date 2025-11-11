@@ -17,9 +17,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
+
+      <body className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100 flex flex-col">
         <LayoutHeader />
-        <main>{children}</main>
+        <main className="flex flex-1 py-16">{children}</main>
         <LayoutFooter />
       </body>
     </html>

@@ -6,6 +6,7 @@ export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'title',
+    defaultColumns: ['title', 'category', 'price', 'actions'],
   },
   fields: [
     {
@@ -70,5 +71,14 @@ export const Products: CollectionConfig = {
       },
     },
     ...slugField(),
+    {
+      name: 'actions',
+      type: 'ui',
+      admin: {
+        components: {
+          Cell: '@/payload/components/ProductActionsCell',
+        },
+      },
+    },
   ],
 }

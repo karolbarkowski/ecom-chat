@@ -1,15 +1,14 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React from 'react'
-import { getPayload } from 'payload'
 import config from '@/payload.config'
 
 export const LayoutHeader: React.FC = async () => {
   const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
 
   return (
     <header className="bg-white dark:bg-gray-900">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a className="block text-teal-600" href="#">
+        <a className="block text-teal-600" href="/">
           <span className="sr-only">Home</span>
           <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -23,8 +22,8 @@ export const LayoutHeader: React.FC = async () => {
           <nav aria-label="Global" className="hidden md:block">
             <ul className="flex items-center gap-6 text-sm">
               <li>
-                <a className="text-gray-500 transition hover:text-gray-500/75" href="#">
-                  About
+                <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
+                  Home
                 </a>
               </li>
             </ul>

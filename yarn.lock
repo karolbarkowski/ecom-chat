@@ -1977,6 +1977,11 @@
   resolved "https://registry.yarnpkg.com/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz#3dc35ba0f1e66b403c00b39344f870298ebb1c8e"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
+"@payloadcms/admin-bar@3.63.0":
+  version "3.63.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/admin-bar/-/admin-bar-3.63.0.tgz#9483b16e530728e36bdaa05a2ea8e853a887500b"
+  integrity sha512-wZ8MqvrCTdjbs8xstCTJNwPWcqPp9aDcnP15bcts7UkrfPKEKu3U4JlZB1nWb9SHrDIvmZFerUkHabmZ3tByBA==
+
 "@payloadcms/db-mongodb@^3.63.0":
   version "3.63.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/db-mongodb/-/db-mongodb-3.63.0.tgz#46aa8ccc77bae2919132d123f6e7eba784181fbb"

@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from 'react'
-import config from '@/payload.config'
 
 export const LayoutHeader: React.FC = async () => {
-  const payloadConfig = await config
-
   return (
     <header className="bg-white dark:bg-gray-900">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -28,18 +25,6 @@ export const LayoutHeader: React.FC = async () => {
               </li>
             </ul>
           </nav>
-
-          <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <a
-                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                target="_blank"
-                href={payloadConfig.routes.admin}
-              >
-                Admin
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </header>

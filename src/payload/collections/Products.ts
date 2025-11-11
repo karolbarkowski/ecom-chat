@@ -1,12 +1,27 @@
 import { CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
 import { mediaImagesField } from '../fields/mediaImageSelector'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'price', 'actions'],
+    defaultColumns: ['title', 'price', 'color', 'actions'],
+    livePreview: {
+      url: ({ data, req }) =>
+        generatePreviewPath({
+          slug: data?.slug,
+          collection: 'products',
+          req,
+        }),
+    },
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: data?.slug as string,
+        collection: 'products',
+        req,
+      }),
   },
   fields: [
     {

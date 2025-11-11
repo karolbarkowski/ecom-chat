@@ -2,6 +2,8 @@ import React from 'react'
 import { LayoutHeader } from '@/components/LayoutComponents/Header'
 import { LayoutFooter } from '@/components/LayoutComponents/Footer'
 import './styles.css'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { AdminBar } from '@/components/AdminBar'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -19,6 +21,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
 
       <body className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100 flex flex-col">
+        <AdminBar />
+        <LivePreviewListener />
+
         <LayoutHeader />
         <main className="flex flex-1 py-16">{children}</main>
         <LayoutFooter />

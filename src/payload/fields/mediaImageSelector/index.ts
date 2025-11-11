@@ -3,13 +3,12 @@ import type { ArrayField, UIField } from 'payload'
 type MediaImageSelectorOptions = {
   name?: string
   label?: string
-  arrayOverrides?: Partial<ArrayField>
 }
 
 type MediaImagesField = (options?: MediaImageSelectorOptions) => [ArrayField, UIField]
 
 export const mediaImagesField: MediaImagesField = (options = {}) => {
-  const { name = 'mediaImages', label = 'Images', arrayOverrides = {} } = options
+  const { name = 'mediaImages', label = 'Images' } = options
 
   const arrayField: ArrayField = {
     name,
@@ -31,19 +30,16 @@ export const mediaImagesField: MediaImagesField = (options = {}) => {
     admin: {
       hidden: true,
     },
-    ...arrayOverrides,
   }
 
   const uiField: UIField = {
-    name: `${name}Selector`,
+    name: `${name}`,
     type: 'ui',
+    label: 'Images',
     admin: {
       components: {
         Field: {
           path: '@/payload/fields/mediaImageSelector/MediaImageSelectorComponent#MediaImageSelectorComponent',
-          clientProps: {
-            arrayFieldPath: name,
-          },
         },
       },
     },

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import React, { useState } from 'react'
-import { UIFieldClientProps } from 'payload'
-import { useFormFields, useForm, Button, FieldLabel } from '@payloadcms/ui'
+import { ArrayFieldClientComponent } from 'payload'
+import { useFormFields, useForm, Button, FieldLabel, useField } from '@payloadcms/ui'
 import './index.scss'
 
 type MediaImageFormField = {
@@ -11,109 +11,50 @@ type MediaImageFormField = {
   order: number
 }
 
-type MediaImageSelectorProps = {
-  arrayFieldPath: string
-} & UIFieldClientProps
-
-export const MediaImageSelectorComponent: React.FC<MediaImageSelectorProps> = ({
-  arrayFieldPath,
-}) => {
-  const { dispatchFields } = useForm()
+export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path }) => {
+  const { rows } = useField({ path, hasRows: true })
+  const { removeFieldRow, setModified } = useForm()
+  const { dispatch } = useFormFields(([_, dispatch]) => ({ dispatch }))
   const [newImageUrl, setNewImageUrl] = useState('')
 
-  // Get the mediaImages array from the form
   const mediaImages = useFormFields(([fields]) => {
-    const imagesCount = fields[arrayFieldPath]?.rows?.length || 0
+    if (!rows) return []
 
-    const formImages = [] as MediaImageFormField[]
-    for (let i = 0; i < imagesCount; i++) {
-      formImages.push({
-        id: fields[`${arrayFieldPath}.${i}.id`]?.value,
-        url: fields[`${arrayFieldPath}.${i}.url`]?.value,
-        order: fields[`${arrayFieldPath}.${i}.order`]?.value,
-      } as MediaImageFormField)
-    }
-
-    return formImages
+    return rows.map(
+      (row, index) =>
+        ({
+          id: row.id,
+          url: fields[`${path}.${index}.url`]?.value || '',
+          order: fields[`${path}.${index}.order`]?.value || '',
+        }) as MediaImageFormField,
+    )
   })
 
   const handleAddImage = () => {
     if (!newImageUrl.trim()) return
 
-    const newImage: MediaImageFormField = {
-      url: newImageUrl.trim(),
-      order: mediaImages.length,
-    }
-
-    const updatedImages = [...mediaImages, newImage]
-
-    // Dispatch field updates for each item individually
-    updatedImages.forEach((img, idx) => {
-      dispatchFields({
-        type: 'UPDATE',
-        path: `${arrayFieldPath}.${idx}.url`,
-        value: img.url,
-      })
-      dispatchFields({
-        type: 'UPDATE',
-        path: `${arrayFieldPath}.${idx}.order`,
-        value: img.order,
-      })
-      if (img.id) {
-        dispatchFields({
-          type: 'UPDATE',
-          path: `${arrayFieldPath}.${idx}.id`,
-          value: img.id,
-        })
-      }
-    })
-
-    // Update the rows metadata
-    dispatchFields({
+    dispatch({
       type: 'UPDATE',
-      path: arrayFieldPath,
-      rows: updatedImages.map((img) => ({ id: img.id || crypto.randomUUID() })),
+      path: `${path}.${rows?.length || 0}`,
+      value: {
+        url: newImageUrl.trim(),
+        order: mediaImages.length,
+      },
     })
 
     setNewImageUrl('')
+    setModified(true)
   }
 
   const handleRemoveImage = (index: number) => {
-    const updatedImages = mediaImages.filter((_, idx) => idx !== index)
-
-    // Update the rows metadata first
-    dispatchFields({
-      type: 'UPDATE',
-      path: arrayFieldPath,
-      rows: updatedImages.map((img) => ({ id: img.id || crypto.randomUUID() })),
-    })
-
-    // Dispatch field updates for remaining items
-    updatedImages.forEach((img, idx) => {
-      dispatchFields({
-        type: 'UPDATE',
-        path: `${arrayFieldPath}.${idx}.url`,
-        value: img.url,
-      })
-      dispatchFields({
-        type: 'UPDATE',
-        path: `${arrayFieldPath}.${idx}.order`,
-        value: idx, // Update order to reflect new positions
-      })
-      if (img.id) {
-        dispatchFields({
-          type: 'UPDATE',
-          path: `${arrayFieldPath}.${idx}.id`,
-          value: img.id,
-        })
-      }
-    })
+    removeFieldRow({ path, rowIndex: index })
+    setModified(true)
   }
 
   return (
     <div className="field-type slug-field-component">
       <div className="label-wrapper">
-        <FieldLabel htmlFor={`field-${arrayFieldPath}`} label="Images" />
+        <FieldLabel htmlFor={`field-${path}`} label="Images" />
       </div>
 
       <div className="media-image-selector">

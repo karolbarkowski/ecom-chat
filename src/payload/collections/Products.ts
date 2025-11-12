@@ -73,6 +73,17 @@ export const Products: CollectionConfig = {
             },
           ],
         },
+        {
+          label: 'Reviews',
+          fields: [
+            {
+              name: 'reviews',
+              type: 'join',
+              collection: 'reviews',
+              on: 'product',
+            },
+          ],
+        },
       ],
     },
     {

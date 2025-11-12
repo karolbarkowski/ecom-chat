@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Users } from './payload/collections/Users'
 import { Products } from './payload/collections/Products'
+import { Reviews } from './payload/collections/Reviews'
 import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImportsAdmin'
 import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
 
@@ -51,7 +52,7 @@ export default buildConfig({
     locales: ['en', 'pl', 'no'],
     defaultLocale: 'en',
   },
-  collections: [Users, Products],
+  collections: [Users, Products, Reviews],
   globals: [ProductImportsAdmin, EmbeddingsAdmin],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

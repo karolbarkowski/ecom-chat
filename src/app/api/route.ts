@@ -7,7 +7,7 @@ export const GET = async (request: Request) => {
     config: configPromise,
   })
 
-  var result = await performHybridSearch('looking for a cheap, christmas home decor below $20', {
+  const result = await performHybridSearch('looking for a cheap, christmas home decor below $20', {
     numCandidates: 5,
   })
 

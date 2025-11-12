@@ -94,7 +94,7 @@ export interface Config {
     'product-imports': ProductImportsSelect<false> | ProductImportsSelect<true>;
     'product-vetor-embeddings': ProductVetorEmbeddingsSelect<false> | ProductVetorEmbeddingsSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'pl' | 'no';
   user: User & {
     collection: 'users';
   };

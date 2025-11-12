@@ -47,6 +47,10 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  localization: {
+    locales: ['en', 'pl', 'no'],
+    defaultLocale: 'en',
+  },
   collections: [Users, Products],
   globals: [ProductImportsAdmin, EmbeddingsAdmin],
   editor: lexicalEditor(),

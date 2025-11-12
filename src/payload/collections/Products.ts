@@ -28,6 +28,7 @@ export const Products: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       type: 'tabs',
@@ -42,6 +43,7 @@ export const Products: CollectionConfig = {
             {
               name: 'color',
               type: 'text',
+              localized: true,
             },
             {
               name: 'price',
@@ -55,6 +57,7 @@ export const Products: CollectionConfig = {
             {
               name: 'description',
               type: 'textarea',
+              localized: true,
             },
             ...mediaImagesField(),
           ],
@@ -74,6 +77,7 @@ export const Products: CollectionConfig = {
     {
       name: 'category',
       type: 'text',
+      localized: true,
       admin: {
         position: 'sidebar',
       },

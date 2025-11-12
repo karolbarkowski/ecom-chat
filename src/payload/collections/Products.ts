@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { slugField } from '../fields/slug'
 import { mediaImagesField } from '../fields/mediaImageSelector'
+import { translationManagerField } from '../fields/translationManager'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 export const Products: CollectionConfig = {
@@ -90,6 +91,7 @@ export const Products: CollectionConfig = {
       },
     },
     ...slugField(),
+    translationManagerField(),
     {
       name: 'actions',
       type: 'ui',

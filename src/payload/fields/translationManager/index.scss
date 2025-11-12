@@ -1,0 +1,62 @@
+.translation-manager {
+  .translation-manager-content {
+    background-color: var(--theme-elevation-50);
+    border: 1px solid var(--theme-elevation-200);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--theme-elevation-800);
+    }
+  }
+
+  .locale-selection-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .flag-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .flag-button {
+    background: transparent;
+    border: 3px solid transparent;
+    border-radius: 6px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+
+    &:hover:not(.disabled) {
+      background-color: var(--theme-elevation-100);
+      transform: scale(1.05);
+    }
+
+    &.selected {
+      border-color: var(--theme-success-500);
+      background-color: var(--theme-elevation-100);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}

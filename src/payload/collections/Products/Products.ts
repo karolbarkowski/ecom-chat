@@ -1,8 +1,8 @@
 import { CollectionConfig } from 'payload'
-import { slugField } from '../fields/slug'
-import { mediaImagesField } from '../fields/mediaImageSelector'
-import { translationManagerField } from '../fields/translationManager'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { mediaImagesField } from '../../fields/mediaImageSelector'
+import { slugField } from '../../fields/slug'
+import { translationManagerField } from '../../fields/translationManager'
 
 export const Products: CollectionConfig = {
   slug: 'products',

@@ -1977,10 +1977,10 @@
   resolved "https://registry.yarnpkg.com/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz#3dc35ba0f1e66b403c00b39344f870298ebb1c8e"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
-"@payloadcms/admin-bar@3.63.0":
-  version "3.63.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/admin-bar/-/admin-bar-3.63.0.tgz#9483b16e530728e36bdaa05a2ea8e853a887500b"
-  integrity sha512-wZ8MqvrCTdjbs8xstCTJNwPWcqPp9aDcnP15bcts7UkrfPKEKu3U4JlZB1nWb9SHrDIvmZFerUkHabmZ3tByBA==
+"@payloadcms/admin-bar@^3.63.0":
+  version "3.64.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/admin-bar/-/admin-bar-3.64.0.tgz#6b826cf3b2117ef36fd39a3783423715ae0d5cdb"
+  integrity sha512-lJqSL7WyIclRPsg+Ubr+N36cjnb30udPlOMhcm37A0GDTZK8yQDv2X1zOlRMJxD6nQNdtEGzDNUwzUbHlvJ7jQ==
 
 "@payloadcms/db-mongodb@^3.63.0":
   version "3.63.0"
@@ -2053,6 +2053,14 @@
     "@payloadcms/email-nodemailer" "3.63.0"
     amazon-cognito-identity-js "^6.1.2"
     nodemailer "7.0.9"
+
+"@payloadcms/plugin-seo@3.63.0":
+  version "3.63.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.63.0.tgz#9605912d3b33613791b92cfe93e00f8a5d99d282"
+  integrity sha512-0DQWuZ/ev9zyeaw2m9pmPoftvmI+yE7RlPcuD/by5IQtES5RI3obMVF/iICBT22WiJ37QulruRR/tuVJEAniIQ==
+  dependencies:
+    "@payloadcms/translations" "3.63.0"
+    "@payloadcms/ui" "3.63.0"
 
 "@payloadcms/richtext-lexical@^3.63.0":
   version "3.63.0"
@@ -3091,6 +3099,11 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.2.tgz#5950e50960793055845e956c427fc2b0d70c5239"
   integrity sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==
 
+"@types/prismjs@^1.26.0":
+  version "1.26.5"
+  resolved "https://registry.yarnpkg.com/@types/prismjs/-/prismjs-1.26.5.tgz#72499abbb4c4ec9982446509d2f14fb8483869d6"
+  integrity sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==
+
 "@types/react-dom@19.1.6":
   version "19.1.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.1.6.tgz#4af629da0e9f9c0f506fc4d1caa610399c595d64"
@@ -3953,7 +3966,7 @@ client-only@0.0.1:
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
-clsx@^2.1.1:
+clsx@^2.0.0, clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
@@ -6733,6 +6746,14 @@ prettier@^3.2.5, prettier@^3.4.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.6.2.tgz#ccda02a1003ebbb2bfda6f83a074978f608b9393"
   integrity sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==
+
+prism-react-renderer@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-2.4.1.tgz#ac63b7f78e56c8f2b5e76e823a976d5ede77e35f"
+  integrity sha512-ey8Ls/+Di31eqzUxC46h8MksNuGx/n0AAC8uKpwFau4RPDYLuE3EXTp8N8G2vX2N7UC/+IXeNUnlWBGGcAG+Ig==
+  dependencies:
+    "@types/prismjs" "^1.26.0"
+    clsx "^2.0.0"
 
 prismjs@^1.30.0:
   version "1.30.0"

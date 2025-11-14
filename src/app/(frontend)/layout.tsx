@@ -1,9 +1,9 @@
-import React from 'react'
-import { LayoutHeader } from '@/components/LayoutComponents/Header'
-import { LayoutFooter } from '@/components/LayoutComponents/Footer'
 import './styles.css'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { AdminBar } from '@/components/AdminBar'
+import React from 'react'
+import { LayoutFooter } from '@/components/LayoutComponents/Footer'
+import { LayoutHeader } from '@/components/LayoutComponents/Header'
+import { AdminBar } from '@/components/Payload/AdminBar'
+import { LivePreviewListener } from '@/components/Payload/LivePreviewListener'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',

@@ -1,14 +1,16 @@
+import path from 'path'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
+import { fileURLToPath } from 'url'
+import { defaultLexical } from '@/fields/lexicalEditor/defaultLexical'
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import { Media } from './payload/collections/Media'
+import { Posts } from './payload/collections/Posts'
+import { Products } from './payload/collections/Products/Products'
+import { Reviews } from './payload/collections/Products/Reviews'
 import { Users } from './payload/collections/Users'
-import { Products } from './payload/collections/Products'
-import { Reviews } from './payload/collections/Reviews'
 import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImportsAdmin'
 import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
 
@@ -52,9 +54,10 @@ export default buildConfig({
     locales: ['en', 'pl', 'no'],
     defaultLocale: 'en',
   },
-  collections: [Users, Products, Reviews],
+  collections: [Users, Products, Reviews, Media, Posts],
   globals: [ProductImportsAdmin, EmbeddingsAdmin],
-  editor: lexicalEditor(),
+  // This config helps us configure global or default features that the other editors can inherit
+  editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

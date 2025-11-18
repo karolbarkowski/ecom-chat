@@ -4,7 +4,7 @@ import React from 'react'
 export const LayoutHeader: React.FC = async () => {
   return (
     <header className="bg-savoy-bg border-b border-savoy-border">
-      <div className="flex h-16 items-center gap-4">
+      <div className="flex h-16 items-center gap-8">
         <a href="/">
           <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -15,10 +15,15 @@ export const LayoutHeader: React.FC = async () => {
         </a>
 
         <nav>
-          <ul className="flex items-center gap-4">
+          <ul className="flex items-center gap-8">
             <li>
               <a className="transition hover:text-savoy-accent-orange" href="/">
                 Home
+              </a>
+            </li>
+            <li>
+              <a className="transition hover:text-savoy-accent-orange" href="/products">
+                Products
               </a>
             </li>
             <li>

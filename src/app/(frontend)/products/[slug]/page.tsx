@@ -31,7 +31,7 @@ export default async function ProductDetailsPage({
     : 0
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <main className="grid grid-cols-1 lg:grid-cols-2 gap-12 container mx-auto py-16">
       {/* Image Gallery Section */}
       <ProductImageGallery
         images={product.mediaImages || []}

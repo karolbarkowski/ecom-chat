@@ -31,11 +31,14 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <AdminBar />
         <LivePreviewListener />
 
-        <div className="container mx-auto">
-          <LayoutHeader />
-          <main className="flex flex-1 py-8">{children}</main>
-          <LayoutFooter />
-        </div>
+        {/* Header gets its own container */}
+        <LayoutHeader />
+
+        {/* Children render full-width, manage their own backgrounds and containers */}
+        <div className="flex-1">{children}</div>
+
+        {/* Footer gets its own container */}
+        <LayoutFooter />
       </body>
     </html>
   )

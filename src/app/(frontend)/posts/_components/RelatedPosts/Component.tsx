@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import React from 'react'
-import { RichText } from '@/components/features'
 import { LinkWithLocale } from '@/components/ui/LinkWithLocale'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 import type { Post } from '@/payload-types'
+import { RichText } from '@/components/RichText'
 export type RelatedPostsProps = {
   className?: string
   docs?: Post[]

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RichText } from '@/components/features'
+import { RichText } from '@/components/RichText'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export type PostSectionBlockProps = {

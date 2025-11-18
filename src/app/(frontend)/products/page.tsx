@@ -17,7 +17,7 @@ export default async function ProductsPage() {
 
   return (
     <main className="bg-savoy-card py-16">
-      <div className="flex gap-12">
+      <div className="flex gap-12 container mx-auto">
         {/* Left Sidebar - Filters */}
         <aside className="w-64 shrink-0">
           <div className="sticky top-8">

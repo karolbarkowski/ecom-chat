@@ -1,7 +1,7 @@
 import type { StaticImageData } from 'next/image'
 
 import React from 'react'
-import { RichText } from '@/components/features'
+import { RichText } from '@/components/RichText'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/cn'
 

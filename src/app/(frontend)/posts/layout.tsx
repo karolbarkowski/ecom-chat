@@ -4,7 +4,7 @@ import { PostsTrendingList } from './_components/PostsTrendingList'
 
 const PostsLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex gap-x-16 min-h-screen w-full">
+    <div className="flex gap-x-16 min-h-screen w-full container mx-auto py-16">
       <main className="flex-3">{children}</main>
 
       <aside className="flex flex-col flex-1 gap-12">

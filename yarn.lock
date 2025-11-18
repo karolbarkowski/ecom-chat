@@ -2054,13 +2054,13 @@
     amazon-cognito-identity-js "^6.1.2"
     nodemailer "7.0.9"
 
-"@payloadcms/plugin-seo@3.63.0":
-  version "3.63.0"
-  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.63.0.tgz#9605912d3b33613791b92cfe93e00f8a5d99d282"
-  integrity sha512-0DQWuZ/ev9zyeaw2m9pmPoftvmI+yE7RlPcuD/by5IQtES5RI3obMVF/iICBT22WiJ37QulruRR/tuVJEAniIQ==
+"@payloadcms/plugin-seo@^3.63.0":
+  version "3.64.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.64.0.tgz#9f4551e20147d6c688193ec33989a51a80455d64"
+  integrity sha512-3NQX6rekouswWJW+M5xb1A/txskwpnz0h/JJVBawKTE8gJXXv5yLfJXqAWC3V32aJXA+3FFGoLrXBNFBDICRCg==
   dependencies:
-    "@payloadcms/translations" "3.63.0"
-    "@payloadcms/ui" "3.63.0"
+    "@payloadcms/translations" "3.64.0"
+    "@payloadcms/ui" "3.64.0"
 
 "@payloadcms/richtext-lexical@^3.63.0":
   version "3.63.0"
@@ -2103,6 +2103,13 @@
   dependencies:
     date-fns "4.1.0"
 
+"@payloadcms/translations@3.64.0":
+  version "3.64.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.64.0.tgz#5c2ad4d06dd22d9b9d06b08ae84d84fc167f686a"
+  integrity sha512-DlNPILu1h+ZTtGUZG28rZtWL/92t5mzK/k7sC4vWk/gPPMOXtZ5fNc6ut2lwzJ13E5lxvtRtVY/+IjNzKrUAFw==
+  dependencies:
+    date-fns "4.1.0"
+
 "@payloadcms/ui@3.63.0", "@payloadcms/ui@^3.63.0":
   version "3.63.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.63.0.tgz#a6260830c547df49e3003dc6c17d0f0f0cafdf49"
@@ -2117,6 +2124,35 @@
     "@faceless-ui/window-info" "3.0.1"
     "@monaco-editor/react" "4.7.0"
     "@payloadcms/translations" "3.63.0"
+    bson-objectid "2.0.4"
+    date-fns "4.1.0"
+    dequal "2.0.3"
+    md5 "2.3.0"
+    object-to-formdata "4.5.1"
+    qs-esm "7.0.2"
+    react-datepicker "7.6.0"
+    react-image-crop "10.1.8"
+    react-select "5.9.0"
+    scheduler "0.25.0"
+    sonner "^1.7.2"
+    ts-essentials "10.0.3"
+    use-context-selector "2.0.0"
+    uuid "10.0.0"
+
+"@payloadcms/ui@3.64.0":
+  version "3.64.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/ui/-/ui-3.64.0.tgz#b406ecc12a38cd6ef7a6d2e3fb7323164584001d"
+  integrity sha512-lFPo66LyIL0m7Uel+xp9RaQ8IXdJ6Wsu2IyRGrEDCFVG0emBFqKPynysEhs53rCMjOTatYF3LVmTlOTnZ/LAVg==
+  dependencies:
+    "@date-fns/tz" "1.2.0"
+    "@dnd-kit/core" "6.0.8"
+    "@dnd-kit/sortable" "7.0.2"
+    "@dnd-kit/utilities" "3.2.2"
+    "@faceless-ui/modal" "3.0.0"
+    "@faceless-ui/scroll-info" "2.0.0"
+    "@faceless-ui/window-info" "3.0.1"
+    "@monaco-editor/react" "4.7.0"
+    "@payloadcms/translations" "3.64.0"
     bson-objectid "2.0.4"
     date-fns "4.1.0"
     dequal "2.0.3"

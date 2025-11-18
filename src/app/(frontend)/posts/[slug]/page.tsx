@@ -3,7 +3,6 @@
 import { draftMode, headers } from 'next/headers'
 import { getPayload } from 'payload'
 import { cache } from 'react'
-import { RichText } from '@/components/features'
 import { LivePreviewListener } from '@/components/Payload/LivePreviewListener'
 import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
@@ -11,6 +10,7 @@ import NotFound from '../../not-found'
 
 import type { Metadata } from 'next'
 import { RelatedPosts } from '../_components/RelatedPosts/Component'
+import { RichText } from '@/components/RichText'
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const locales = ['pl', 'en']

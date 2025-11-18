@@ -1,11 +1,16 @@
-export const RatingStars = () => {
+interface RatingStarsProps {
+  rating: number
+  count: number
+}
+
+export const RatingStars = ({ rating, count }: RatingStarsProps) => {
   return (
-    <div className="flex justify-center items-center gap-x-4 text-gray-400 text-sm">
+    <div className="flex justify-center items-center gap-x-1 text-gray-400 text-sm">
       <div className="flex">
         {[...Array(5)].map((_, index) => (
           <svg
             key={index}
-            className="w-5 h-5"
+            className={`w-5 h-5 ${index < rating ? 'text-savoy-accent-orange' : 'text-gray-200'}`}
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -14,9 +19,7 @@ export const RatingStars = () => {
           </svg>
         ))}
       </div>
-      <p>
-        <span className="text-gray-100">5.0</span> by over 200 users
-      </p>
+      <span>by {count} users</span>
     </div>
   )
 }

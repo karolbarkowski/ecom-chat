@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 interface ProductImageGalleryProps {
-  images: Array<{ url: string; isMain: boolean; id?: string | null }>
+  images: Array<{ url: string; id?: string | null }>
   productTitle: string
   discountPercentage: number
 }
@@ -77,21 +77,21 @@ export function ProductImageGallery({
   return (
     <div className="space-y-6">
       {/* Main Image Slider */}
-      <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative  overflow-hidden">
         <Slider {...mainSliderSettings}>
           {images.map((image, index) => (
             <div key={image.id || index} className="relative">
               <img
                 src={image.url}
                 alt={`${productTitle} - View ${index + 1}`}
-                className="w-full h-96 lg:h-[500px] object-cover"
+                className="w-full h-96 lg:h-[500px] object-cover rounded-2xl"
               />
             </div>
           ))}
         </Slider>
         {discountPercentage > 0 && (
           <div className="absolute top-4 left-4 z-10">
-            <span className="bg-linear-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+            <span className="bg-savoy-accent-orange text-white px-3 py-1 rounded-full text-sm  shadow-lg">
               - {discountPercentage}%
             </span>
           </div>
@@ -104,7 +104,7 @@ export function ProductImageGallery({
           <Slider {...thumbnailSliderSettings}>
             {images.map((image, index) => (
               <div key={image.id || index} className="px-1.5">
-                <div className="w-full h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-purple-500">
+                <div className="w-full h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ">
                   <img
                     src={image.url}
                     alt={`Thumbnail ${index + 1}`}
@@ -150,7 +150,6 @@ export function ProductImageGallery({
         }
 
         .slick-current .slick-slide > div > div {
-          border-color: #a855f7 !important;
           opacity: 1 !important;
         }
 
@@ -170,11 +169,6 @@ export function ProductImageGallery({
           color: white;
           opacity: 0.5;
           font-size: 12px;
-        }
-
-        .slick-dots li.slick-active button:before {
-          opacity: 1;
-          color: #a855f7;
         }
       `}</style>
     </div>

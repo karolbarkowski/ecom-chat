@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { getPayload } from 'payload'
 import React from 'react'
 
 import config from '@/payload.config'
+import { RatingStars } from './_components/RatingStars'
 
 export default async function ProductsPage() {
   const payloadConfig = await config
@@ -11,19 +11,69 @@ export default async function ProductsPage() {
 
   const result = await payload.find({
     collection: 'products',
-    limit: 20,
+    limit: 12,
   })
   const products = result.docs
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-      <div className="flex flex-col gap-6">
-        {products.map((product) => (
-          <a key={product.id} href={`product/${product.slug}`} className="flex flex-row gap-2">
-            <img src={product.mediaImages?.[0].url} width={40} />
-            {product.title}
-          </a>
-        ))}
+    <main className="bg-savoy-card py-16">
+      <div className="flex gap-12">
+        {/* Left Sidebar - Filters */}
+        <aside className="w-64 shrink-0">
+          <div className="sticky top-8">
+            <h2>Filters</h2>
+            {/* Placeholder for future filters */}
+          </div>
+        </aside>
+
+        {/* Product Grid */}
+        <div className="flex-1">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="flex flex-row gap-16 py-16 border-b border-savoy-border"
+            >
+              {/* Product Image */}
+              <div>
+                {product.mediaImages?.[0]?.url && (
+                  <img
+                    src={product.mediaImages[0].url}
+                    alt={product.title}
+                    className="max-w-[200px] h-full object-cover"
+                  />
+                )}
+              </div>
+
+              {/* Product Info */}
+              <div className="text-left flex gap-4 flex-col">
+                {/* Title */}
+                <h1 className="text-3xl tracking-wide mb-3 line-clamp-1 max-w-[50ch]">
+                  {product.title}
+                </h1>
+
+                {/* Rating */}
+                <RatingStars rating={4} count={product.reviews?.totalDocs || 0} />
+
+                {/* Price */}
+                <div className="flex items-center  gap-2">
+                  {product.pricePrevious && (
+                    <span className="text-[var(--font-size-sm)] text-[var(--color-savoy-text-lighter)] line-through">
+                      ${product.pricePrevious.toFixed(2)}
+                    </span>
+                  )}
+                  <span className="text-[var(--font-size-lg)] text-[var(--color-savoy-text)] font-[var(--font-weight-normal)]">
+                    ${product.price.toFixed(2)}
+                  </span>
+                </div>
+
+                <p>{product.description}</p>
+
+                {/* show more */}
+                <a href={`/products/${product.slug}`}>Show More</a>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   )

@@ -26,6 +26,11 @@ export const LayoutHeader: React.FC = async () => {
                 Posts
               </a>
             </li>
+            <li>
+              <a className="transition hover:text-savoy-accent-orange" href="/styleguide">
+                Styleguide
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

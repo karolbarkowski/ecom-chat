@@ -6,7 +6,10 @@
       "Bash(npx tsc:*)",
       "Bash(cat:*)",
       "Bash(pnpm run dev)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(npm ls:*)",
+      "Bash(pnpm install:*)"
     ],
     "deny": [],
     "ask": []

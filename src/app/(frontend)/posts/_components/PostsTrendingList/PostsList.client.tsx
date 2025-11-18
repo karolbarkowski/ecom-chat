@@ -19,9 +19,11 @@ export const PostsListClient = (props: ProductListClientProps) => {
           <div key={p.id}>
             <LinkWithLocale
               href={`posts/${p.slug}`}
-              className="flex-col max-w-sm overflow-hiddenflex text-gray-400 hover:text-gray-800"
+              className="flex-col max-w-sm overflow-hiddenflex "
             >
-              <h2 className="text-header6 uppercase tracking-[0.2em]">{p.title}</h2>
+              <h2 className="uppercase tracking-[0.2em] transition hover:text-savoy-accent-orange">
+                {p.title}
+              </h2>
               <span>{author?.toString()}</span>
             </LinkWithLocale>
           </div>

@@ -3,15 +3,14 @@
 import { draftMode, headers } from 'next/headers'
 import { getPayload } from 'payload'
 import { cache } from 'react'
-import Section from '@/components/Containers/section'
 import { RichText } from '@/components/features'
 import { LivePreviewListener } from '@/components/Payload/LivePreviewListener'
-import { RelatedPosts } from '@/components/Posts/RelatedPosts/Component'
 import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
 import NotFound from '../../not-found'
 
 import type { Metadata } from 'next'
+import { RelatedPosts } from '../_components/RelatedPosts/Component'
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const locales = ['pl', 'en']
@@ -54,33 +53,40 @@ export default async function Post({ params: paramsPromise }: Args) {
   }
 
   const imgUrl = typeof post.heroImage === 'string' ? post.heroImage : post.heroImage?.url
+  const author = typeof post.authors?.[0] === 'object' ? post.authors?.[0].email : ''
+  const publicationDate =
+    typeof post.publishedAt === 'string'
+      ? new Date(post.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')
+      : ''
 
   return (
     <article className="pb-16">
       {draft && <LivePreviewListener />}
 
-      {imgUrl && <img src={imgUrl} alt={post.title} className="mb-8 w-full object-cover" />}
+      {imgUrl && (
+        <img src={imgUrl} alt={post.title} className="mb-8 w-full object-cover rounded-2xl" />
+      )}
       <div>
-        <h1 className="mb-8 text-header1">{post.title}</h1>
-        <RichText
-          className="mx-auto max-w-[48rem]"
-          data={post.content}
-          enableGutter={false}
-          enableProse={false}
-        />
+        <div className="text-center mb-16">
+          <h1 className="text-3xl uppercase tracking-wider inline-block border-b-2 border-savoy-text pb-2 mb-3">
+            {post.title}
+          </h1>
+
+          <div className="text-xs uppercase tracking-[0.2em]">
+            By {author?.toString()} on {publicationDate}
+          </div>
+        </div>
+
+        <RichText data={post.content} enableGutter={false} enableProse={false} />
 
         {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <Section className="mt-16">
-            <Section.Header>
-              <h5 className="text-header5">Related posts</h5>
-            </Section.Header>
-            <Section.Content>
-              <RelatedPosts
-                className="lg:grid lg:grid-cols-subgrid grid-rows-[2fr] col-span-3 col-start-1 mt-12"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            </Section.Content>
-          </Section>
+          <div className="mt-16">
+            <h5 className="text-header5">Related posts</h5>
+            <RelatedPosts
+              className="lg:grid lg:grid-cols-subgrid grid-rows-[2fr] col-span-3 col-start-1 mt-12"
+              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+            />
+          </div>
         )}
       </div>
     </article>

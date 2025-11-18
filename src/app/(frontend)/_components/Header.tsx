@@ -3,7 +3,7 @@ import React from 'react'
 
 export const LayoutHeader: React.FC = async () => {
   return (
-    <header className="bg-savoy-bg">
+    <header className="bg-savoy-bg border-b border-savoy-border">
       <div className="flex h-16 items-center gap-4">
         <a href="/">
           <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,6 +1,5 @@
-import { PostsList } from '@/components/Posts/PostsList'
-
 import type { Metadata } from 'next/types'
+import { PostsList } from './_components/PostsList'
 
 // export const dynamic = 'force-static'
 export const revalidate = 600

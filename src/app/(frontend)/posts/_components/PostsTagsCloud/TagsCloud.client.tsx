@@ -16,9 +16,9 @@ export const TagsCloudClient = (props: TagsCloudProps) => {
           <LinkWithLocale
             key={i}
             href={`/posts?tag=${tag}`}
-            className="inline-block bg-gray-100 hover:bg-gray-300 mr-2 px-2 py-1 rounded-full font-mono font-semibold text-gray-800 text-xs"
+            className="inline-block bg-savoy-text hover:bg-savoy-accent-orange  px-3 py-2 rounded-full font-mono  text-savoy-bg text-xs"
           >
-            {tag}
+            #{tag}
           </LinkWithLocale>
         )
       })}

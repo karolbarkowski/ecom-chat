@@ -303,7 +303,6 @@ export interface Post {
   id: string;
   title: string;
   description?: string | null;
-  isTrending?: boolean | null;
   heroImage?: (string | null) | Media;
   content: {
     root: {
@@ -320,12 +319,6 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  tags?:
-    | {
-        tag?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   /**
    * Comments associated with this post
    */
@@ -338,8 +331,15 @@ export interface Post {
     image?: (string | null) | Media;
     description?: string | null;
   };
+  isTrending?: boolean | null;
   publishedAt?: string | null;
   author?: (string | null) | User;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   populatedAuthor?: {
     id?: string | null;
     name?: string | null;
@@ -705,15 +705,8 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  isTrending?: T;
   heroImage?: T;
   content?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
   comments?: T;
   meta?:
     | T
@@ -722,8 +715,15 @@ export interface PostsSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  isTrending?: T;
   publishedAt?: T;
   author?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
   populatedAuthor?:
     | T
     | {

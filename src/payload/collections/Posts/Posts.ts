@@ -22,7 +22,7 @@ export const Posts: CollectionConfig<'posts'> = {
     update: anyone,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'isTrending', 'author'],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -62,10 +62,6 @@ export const Posts: CollectionConfig<'posts'> = {
           label: 'Content',
           fields: [
             {
-              name: 'isTrending',
-              type: 'checkbox',
-            },
-            {
               name: 'heroImage',
               type: 'upload',
               relationTo: 'media',
@@ -78,21 +74,11 @@ export const Posts: CollectionConfig<'posts'> = {
               label: false,
               required: true,
             },
-            {
-              name: 'tags',
-              type: 'array',
-              fields: [
-                {
-                  name: 'tag',
-                  type: 'text',
-                },
-              ],
-              admin: {
-                components: {
-                  Field: '/payload/fields/tagsArray/tagsArrayComponent',
-                },
-              },
-            },
+          ],
+        },
+        {
+          label: 'Comments',
+          fields: [
             {
               name: 'comments',
               type: 'relationship',
@@ -134,9 +120,18 @@ export const Posts: CollectionConfig<'posts'> = {
       ],
     },
     {
+      name: 'isTrending',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'publishedAt',
       type: 'date',
       admin: {
+        disabled: true,
+        readOnly: true,
         date: {
           pickerAppearance: 'dayAndTime',
         },
@@ -160,6 +155,22 @@ export const Posts: CollectionConfig<'posts'> = {
         position: 'sidebar',
       },
       relationTo: 'users',
+    },
+    {
+      name: 'tags',
+      type: 'array',
+      fields: [
+        {
+          name: 'tag',
+          type: 'text',
+        },
+      ],
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '/payload/fields/tagsArray/tagsArrayComponent',
+        },
+      },
     },
     // This field is only used to populate the user data via the `populateAuthors` hook
     // This is because the `user` collection has access control locked to protect user privacy

@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 
-export const Reviews: CollectionConfig = {
+export const ProductReviews: CollectionConfig = {
   slug: 'reviews',
   admin: {
     useAsTitle: 'rating',
@@ -21,7 +21,7 @@ export const Reviews: CollectionConfig = {
     },
     {
       name: 'content',
-      type: 'richText',
+      type: 'textarea',
       required: true,
     },
     {

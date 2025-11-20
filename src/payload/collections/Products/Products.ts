@@ -78,9 +78,9 @@ export const Products: CollectionConfig = {
           fields: [
             {
               name: 'reviews',
-              type: 'join',
-              collection: 'reviews',
-              on: 'product',
+              type: 'relationship',
+              relationTo: 'reviews',
+              hasMany: true,
             },
           ],
         },

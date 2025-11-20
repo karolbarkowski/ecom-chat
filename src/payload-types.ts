@@ -72,23 +72,21 @@ export interface Config {
     reviews: Review;
     media: Media;
     posts: Post;
+    'post-comments': PostComment;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    products: {
-      reviews: 'reviews';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'post-comments': PostCommentsSelect<false> | PostCommentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -145,6 +143,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  name: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -183,11 +182,7 @@ export interface Product {
       }[]
     | null;
   embedding?: number[] | null;
-  reviews?: {
-    docs?: (string | Review)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
+  reviews?: (string | Review)[] | null;
   category?: string | null;
   manufacturer?: string | null;
   slug?: string | null;
@@ -202,21 +197,7 @@ export interface Product {
 export interface Review {
   id: string;
   rating: '1' | '2' | '3' | '4' | '5';
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  content: string;
   user: string | User;
   product: string | Product;
   updatedAt: string;
@@ -345,7 +326,10 @@ export interface Post {
         id?: string | null;
       }[]
     | null;
-  relatedPosts?: (string | Post)[] | null;
+  /**
+   * Comments associated with this post
+   */
+  comments?: (string | PostComment)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -367,6 +351,17 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post-comments".
+ */
+export interface PostComment {
+  id: string;
+  content: string;
+  user: string | User;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -503,6 +498,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'post-comments';
+        value: string | PostComment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -551,6 +550,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -716,7 +716,7 @@ export interface PostsSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
-  relatedPosts?: T;
+  comments?: T;
   meta?:
     | T
     | {
@@ -737,6 +737,16 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post-comments_select".
+ */
+export interface PostCommentsSelect<T extends boolean = true> {
+  content?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,6 +1,4 @@
 import { defaultLexical } from '@/fields/lexicalEditor/defaultLexical'
-import { anyone } from '@/payload/access/anyone'
-import { authenticated } from '@/payload/access/authenticated'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import {
@@ -10,41 +8,18 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {
-  AlignFeature,
-  BlockquoteFeature,
-  ChecklistFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  IndentFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-  SubscriptFeature,
-  SuperscriptFeature,
-} from '@payloadcms/richtext-lexical'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
 import type { CollectionConfig } from 'payload'
+import { anyone } from '@/payload/access/anyone'
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: anyone,
+    delete: anyone,
     read: anyone,
-    update: authenticated,
-  },
-  // This config controls what's populated by default when a post is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
-  defaultPopulate: {
-    title: true,
-    slug: true,
-    meta: {
-      image: true,
-      description: true,
-    },
+    update: anyone,
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -69,16 +44,16 @@ export const Posts: CollectionConfig<'posts'> = {
   },
   fields: [
     {
-      localized: true,
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
-      localized: true,
       name: 'description',
       type: 'textarea',
       required: false,
+      localized: true,
     },
     {
       type: 'tabs',
@@ -118,26 +93,14 @@ export const Posts: CollectionConfig<'posts'> = {
                 },
               },
             },
-          ],
-        },
-        {
-          label: 'Meta',
-          fields: [
             {
-              name: 'relatedPosts',
+              name: 'comments',
               type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
+              relationTo: 'post-comments',
               hasMany: true,
-              relationTo: 'posts',
+              admin: {
+                description: 'Comments associated with this post',
+              },
             },
           ],
         },

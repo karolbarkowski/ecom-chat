@@ -63,7 +63,7 @@ async function getPostsPage({ payload, locale }: { payload: BasePayload; locale:
       await payload.find({
         collection: 'posts',
         locale,
-        depth: 1,
+        depth: 2,
         limit: 10,
         sort: '-created_at',
       })
@@ -90,6 +90,8 @@ export const PostsList = async (props: PostsListProps) => {
 
     case 'all':
       posts = await getPostsPage({ payload, locale })
+      console.log('All posts:')
+      console.log(posts)
       break
   }
 

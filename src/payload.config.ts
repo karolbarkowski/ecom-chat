@@ -7,12 +7,13 @@ import { defaultLexical } from '@/fields/lexicalEditor/defaultLexical'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { Media } from './payload/collections/Media'
-import { Posts } from './payload/collections/Posts'
+import { Posts } from './payload/collections/Posts/Posts'
 import { Products } from './payload/collections/Products/Products'
-import { Reviews } from './payload/collections/Products/Reviews'
+import { ProductReviews } from './payload/collections/Products/ProductReviews'
 import { Users } from './payload/collections/Users'
 import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImportsAdmin'
 import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
+import { PostComments } from './payload/collections/Posts/PostComments'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,7 +55,7 @@ export default buildConfig({
     locales: ['en', 'pl', 'no'],
     defaultLocale: 'en',
   },
-  collections: [Users, Products, Reviews, Media, Posts],
+  collections: [Users, Products, ProductReviews, Media, Posts, PostComments],
   globals: [ProductImportsAdmin, EmbeddingsAdmin],
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,

@@ -90,8 +90,6 @@ export const PostsList = async (props: PostsListProps) => {
 
     case 'all':
       posts = await getPostsPage({ payload, locale })
-      console.log('All posts:')
-      console.log(posts)
       break
   }
 

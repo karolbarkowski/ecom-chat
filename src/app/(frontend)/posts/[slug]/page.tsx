@@ -51,8 +51,6 @@ export default async function Post({ params: paramsPromise }: Args) {
   const locale = 'en'
   const post = await PostsService.queryPostBySlug({ slug, locale })
 
-  console.log('Post :', post)
-
   if (!post) {
     return <NotFound />
   }
@@ -85,18 +83,22 @@ export default async function Post({ params: paramsPromise }: Args) {
         <RichText data={post.content} enableGutter={false} enableProse={false} />
 
         {post.comments && post.comments.length > 0 && (
-          <div className="mt-16">
-            <h5 className="text-header5 mb-8">Comments</h5>
-            <div className="space-y-6">
+          <div className="mt-32">
+            <h1 className="text-xl uppercase tracking-logo mb-2 text-center">
+              {post.comments.length} replies to "{post.title}"
+            </h1>
+
+            <div className="space-y-6 divide-y divide-savoy-border">
               {post.comments
                 .filter((comment): comment is PostComment => typeof comment === 'object')
                 .map((comment, index) => {
                   const userName =
                     typeof comment.user === 'object' ? comment.user.email : comment.user
                   return (
-                    <div key={index} className="border border-savoy-border p-4 rounded-lg">
-                      <p className="font-semibold">{userName} says:</p>
-                      <p>{comment.content}</p>
+                    <div key={index} className=" py-4 ">
+                      <h3 className="text-md uppercase">{userName}</h3>
+                      <p className="text-xs text-savoy-text-light">{comment.createdAt}</p>
+                      <p className="text-xsmtext-savoy-text mt-2">{comment.content}</p>
                     </div>
                   )
                 })}

@@ -57,11 +57,11 @@ export default async function ProductsPage() {
                 {/* Price */}
                 <div className="flex items-center  gap-2">
                   {product.pricePrevious && (
-                    <span className="text-[var(--font-size-sm)] text-[var(--color-savoy-text-lighter)] line-through">
+                    <span className="text-(--font-size-sm) line-through">
                       ${product.pricePrevious.toFixed(2)}
                     </span>
                   )}
-                  <span className="text-[var(--font-size-lg)] text-[var(--color-savoy-text)] font-[var(--font-weight-normal)]">
+                  <span className="text-(--font-size-lg) font-(--font-weight-normal)">
                     ${product.price.toFixed(2)}
                   </span>
                 </div>

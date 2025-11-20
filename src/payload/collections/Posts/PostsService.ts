@@ -18,13 +18,12 @@ const queryPostBySlug = cache(async ({ slug, locale }: { slug: string; locale: '
       },
     },
     select: {
-      slug: true,
       comments: true,
       title: true,
       heroImage: true,
       content: true,
       publishedAt: true,
-      populatedAuthors: true,
+      author: true,
     },
   })
 

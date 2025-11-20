@@ -51,13 +51,14 @@ export default async function Post({ params: paramsPromise }: Args) {
   const locale = 'en'
   const post = await PostsService.queryPostBySlug({ slug, locale })
 
+  console.log('Post :', post)
+
   if (!post) {
     return <NotFound />
   }
 
   const imgUrl = typeof post.heroImage === 'string' ? post.heroImage : post.heroImage?.url
-  const author =
-    typeof post.populatedAuthor === 'object' ? post.populatedAuthor.name : ''
+  const author = typeof post.author === 'object' ? post.author?.name : ''
   const publicationDate =
     typeof post.publishedAt === 'string'
       ? new Date(post.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')

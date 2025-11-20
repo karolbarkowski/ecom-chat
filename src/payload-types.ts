@@ -358,6 +358,7 @@ export interface PostComment {
   id: string;
   content: string;
   user: string | User;
+  sentiment?: ('1' | '0' | '-1') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -743,6 +744,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface PostCommentsSelect<T extends boolean = true> {
   content?: T;
   user?: T;
+  sentiment?: T;
   updatedAt?: T;
   createdAt?: T;
 }

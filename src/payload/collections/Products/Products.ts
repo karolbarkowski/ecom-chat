@@ -108,7 +108,7 @@ export const Products: CollectionConfig = {
       type: 'ui',
       admin: {
         components: {
-          Cell: '@/payload/components/ProductActionsCell',
+          Cell: '@/payload/collections/Products/components/ProductActionsCell',
         },
       },
     },

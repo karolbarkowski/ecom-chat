@@ -154,20 +154,19 @@ export const Posts: CollectionConfig<'posts'> = {
       },
     },
     {
-      name: 'authors',
+      name: 'author',
       type: 'relationship',
       admin: {
         position: 'sidebar',
       },
-      hasMany: true,
       relationTo: 'users',
     },
     // This field is only used to populate the user data via the `populateAuthors` hook
     // This is because the `user` collection has access control locked to protect user privacy
     // GraphQL will also not return mutated user data that differs from the underlying schema
     {
-      name: 'populatedAuthors',
-      type: 'array',
+      name: 'populatedAuthor',
+      type: 'group',
       access: {
         update: () => false,
       },

@@ -15,7 +15,7 @@ export const PostsListClient = (props: ProductListClientProps) => {
     <div className="flex flex-col gap-16">
       {posts.map((p) => {
         const imgUrl = typeof p.heroImage === 'string' ? p.heroImage : p.heroImage?.url
-        const author = typeof p.authors?.[0] === 'object' ? p.authors?.[0].email : ''
+        const author = typeof p.author === 'object' ? p.author.email : ''
         const publicationDate =
           typeof p.publishedAt === 'string'
             ? new Date(p.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')

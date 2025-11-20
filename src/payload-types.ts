@@ -339,13 +339,11 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
+  author?: (string | null) | User;
+  populatedAuthor?: {
+    id?: string | null;
+    name?: string | null;
+  };
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -725,8 +723,8 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
-  authors?: T;
-  populatedAuthors?:
+  author?: T;
+  populatedAuthor?:
     | T
     | {
         id?: T;

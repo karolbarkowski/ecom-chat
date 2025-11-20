@@ -57,7 +57,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   const imgUrl = typeof post.heroImage === 'string' ? post.heroImage : post.heroImage?.url
   const author =
-    typeof post.populatedAuthors?.[0] === 'object' ? post.populatedAuthors?.[0].name : ''
+    typeof post.populatedAuthor === 'object' ? post.populatedAuthor.name : ''
   const publicationDate =
     typeof post.publishedAt === 'string'
       ? new Date(post.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')

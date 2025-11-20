@@ -86,6 +86,9 @@ export const Posts: CollectionConfig<'posts'> = {
               hasMany: true,
               admin: {
                 description: 'Comments associated with this post',
+                components: {
+                  Field: '/payload/fields/commentsTable/CommentsTableComponent',
+                },
               },
             },
           ],

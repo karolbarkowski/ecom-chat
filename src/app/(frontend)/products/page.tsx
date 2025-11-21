@@ -52,7 +52,7 @@ export default async function ProductsPage() {
                 </h1>
 
                 {/* Rating */}
-                <RatingStars rating={4} count={product.reviews?.totalDocs || 0} />
+                <RatingStars rating={'4'} count={1} />
 
                 {/* Price */}
                 <div className="flex items-center  gap-2">

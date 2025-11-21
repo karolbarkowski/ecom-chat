@@ -3,6 +3,7 @@
 
 import { LinkWithLocale } from '@/components/ui/LinkWithLocale'
 import { Post } from '@/payload-types'
+import { dateToFormattedString } from '@/utilities/text-format'
 
 export type ProductListClientProps = {
   posts: Post[]
@@ -15,11 +16,7 @@ export const PostsListClient = (props: ProductListClientProps) => {
     <div className="flex flex-col gap-16">
       {posts.map((p) => {
         const imgUrl = typeof p.heroImage === 'string' ? p.heroImage : p.heroImage?.url
-        const author = typeof p.author === 'object' ? p.author.email : ''
-        const publicationDate =
-          typeof p.publishedAt === 'string'
-            ? new Date(p.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')
-            : ''
+        const author = typeof p.author === 'object' ? p.author?.name : ''
 
         return (
           <div key={p.id} className="flex flex-col gap-4">
@@ -38,7 +35,7 @@ export const PostsListClient = (props: ProductListClientProps) => {
 
               {/* author and date */}
               <div className="text-xs uppercase tracking-[0.2em]">
-                {author?.toString()} | {publicationDate}
+                {author?.toString()} | {dateToFormattedString(p.publishedAt)}
               </div>
             </LinkWithLocale>
 

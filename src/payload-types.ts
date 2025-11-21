@@ -182,7 +182,6 @@ export interface Product {
       }[]
     | null;
   embedding?: number[] | null;
-  reviews?: (string | Review)[] | null;
   category?: string | null;
   manufacturer?: string | null;
   slug?: string | null;
@@ -196,6 +195,7 @@ export interface Product {
  */
 export interface Review {
   id: string;
+  product: string | Product;
   rating: '1' | '2' | '3' | '4' | '5';
   content: string;
   user: string | User;
@@ -586,7 +586,6 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   embedding?: T;
-  reviews?: T;
   category?: T;
   manufacturer?: T;
   slug?: T;
@@ -599,6 +598,7 @@ export interface ProductsSelect<T extends boolean = true> {
  * via the `definition` "reviews_select".
  */
 export interface ReviewsSelect<T extends boolean = true> {
+  product?: T;
   rating?: T;
   content?: T;
   user?: T;

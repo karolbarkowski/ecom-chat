@@ -21,7 +21,7 @@ export function PostComments({ comments, postTitle }: PostCommentsProps) {
         {comments
           .filter((comment): comment is PostComment => typeof comment === 'object')
           .map((comment, index) => {
-            const userName = typeof comment.user === 'object' ? comment.user.email : comment.user
+            const userName = typeof comment.user === 'object' ? comment.user.name : comment.user
             return (
               <div key={index} className=" py-4 ">
                 <h3 className="text-md uppercase">{userName}</h3>

@@ -73,17 +73,6 @@ export const Products: CollectionConfig = {
             },
           ],
         },
-        {
-          label: 'Reviews',
-          fields: [
-            {
-              name: 'reviews',
-              type: 'relationship',
-              relationTo: 'reviews',
-              hasMany: true,
-            },
-          ],
-        },
       ],
     },
     {

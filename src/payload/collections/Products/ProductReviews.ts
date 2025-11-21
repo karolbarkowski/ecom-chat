@@ -12,6 +12,12 @@ export const ProductReviews: CollectionConfig = {
   },
   fields: [
     {
+      name: 'product',
+      type: 'relationship',
+      relationTo: 'products',
+      required: true,
+    },
+    {
       name: 'rating',
       type: 'select',
       required: true,

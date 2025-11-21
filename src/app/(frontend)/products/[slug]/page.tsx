@@ -38,7 +38,7 @@ export default async function ProductDetailsPage({
         </div>
 
         {/* Reviews */}
-        <RatingStars rating={'4'} count={product.reviews?.length || 0} />
+        <RatingStars rating={'4'} count={1} />
 
         {/* Price Section */}
         <div className="flex items-center space-x-4 mb-4">
@@ -76,12 +76,10 @@ export default async function ProductDetailsPage({
         </div>
       </div>
 
-      {product.reviews && (
-        <div className="col col-span-2 mt-16 mb-2">
-          <h1 className="text-3xl uppercase tracking-wide mb-2">User Reviews</h1>
-          <ProductReviews reviews={product.reviews} />
-        </div>
-      )}
+      <div className="col col-span-2 mt-16 mb-2">
+        <h1 className="text-3xl uppercase tracking-wide mb-2">User Reviews</h1>
+        <ProductReviews productId={product.id} />
+      </div>
     </main>
   )
 }

@@ -17,6 +17,8 @@ export type ProductDTO = {
   manufacturer?: Product['manufacturer']
   savings: number
   savingsFormatted: string
+  ratingAverage: number
+  ratingsCount: number
 }
 
 export type ProductReviewDTO = {
@@ -57,6 +59,8 @@ const queryBySlug = cache(
       ...product,
       savings,
       savingsFormatted: numberToFormattedString(savings),
+      ratingAverage: product['rating-average'] ? product['rating-average'] : 0,
+      ratingsCount: product['rating-count'] || 0,
     }
   },
 )

@@ -14,8 +14,6 @@ export default async function ProductDetailsPage({
   const slug = (await params).slug
   const product = await ProductsService.queryBySlug({ slug, locale: 'en' })
 
-  console.log('ProductDetailsPage product:', product)
-
   if (!product) {
     notFound()
   }
@@ -37,8 +35,10 @@ export default async function ProductDetailsPage({
           <p className="text-lg">by {product.manufacturer}</p>
         </div>
 
-        {/* Reviews */}
-        <RatingStars rating={'4'} count={1} />
+        {/* <RatingStars rating={Math.round(product.ratingAverage).toString()} count={1} /> */}
+        <span>
+          {product.ratingAverage} by {product.ratingsCount} users
+        </span>
 
         {/* Price Section */}
         <div className="flex items-center space-x-4 mb-4">

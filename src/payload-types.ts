@@ -169,6 +169,8 @@ export interface User {
 export interface Product {
   id: string;
   title: string;
+  'rating-average'?: number | null;
+  'rating-count'?: number | null;
   url?: string | null;
   color?: string | null;
   price: number;
@@ -573,6 +575,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
+  'rating-average'?: T;
+  'rating-count'?: T;
   url?: T;
   color?: T;
   price?: T;

@@ -32,6 +32,22 @@ export const Products: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'rating-average',
+      type: 'number',
+      admin: {
+        readOnly: true,
+        hidden: true,
+      },
+    },
+    {
+      name: 'rating-count',
+      type: 'number',
+      admin: {
+        readOnly: true,
+        hidden: true,
+      },
+    },
+    {
       type: 'tabs',
       tabs: [
         {
@@ -98,6 +114,17 @@ export const Products: CollectionConfig = {
       admin: {
         components: {
           Cell: '@/payload/collections/Products/components/ProductActionsCell',
+        },
+      },
+    },
+    {
+      name: 'rating-display',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '@/payload/collections/Products/components/RatingDisplayField',
+          Cell: '@/payload/collections/Products/components/RatingDisplayCell',
         },
       },
     },

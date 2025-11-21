@@ -30,11 +30,5 @@ export const ProductReviews: CollectionConfig = {
       relationTo: 'users',
       required: true,
     },
-    {
-      name: 'product',
-      type: 'relationship',
-      relationTo: 'products',
-      required: true,
-    },
   ],
 }

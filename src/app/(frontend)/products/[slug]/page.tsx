@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation'
-import { Product } from '@/payload-types'
-import config from '@payload-config'
-import { getPayload } from 'payload'
 import { ProductImageGallery } from '../_components/ProductImageGallery'
 import { RatingStars } from '../_components/RatingStars'
+import { ProductsService } from '@/payload/collections/Products/ProductsService'
+import { ProductReviews } from '../_components/ProductReviews/ProductReviews'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,22 +12,13 @@ export default async function ProductDetailsPage({
   params: Promise<{ slug: string }>
 }) {
   const slug = (await params).slug
-  const payload = await getPayload({ config })
-  const product = await payload
-    .find({
-      collection: 'products',
-      where: { slug: { equals: slug } },
-    })
-    .then((res) => res.docs[0] as Product | undefined)
+  const product = await ProductsService.queryBySlug({ slug, locale: 'en' })
+
+  console.log('ProductDetailsPage product:', product)
 
   if (!product) {
     notFound()
   }
-
-  // Calculate discount savings
-  const savings = product.pricePrevious
-    ? Math.round((product.pricePrevious - product.price) * 100) / 100
-    : 0
 
   return (
     <main className="grid grid-cols-1 lg:grid-cols-2 gap-12 container mx-auto py-16">
@@ -36,7 +26,7 @@ export default async function ProductDetailsPage({
       <ProductImageGallery
         images={product.mediaImages || []}
         productTitle={product.title}
-        discountPercentage={savings}
+        discountPercentage={product.savings}
       />
 
       {/* Product Information Section */}
@@ -48,16 +38,16 @@ export default async function ProductDetailsPage({
         </div>
 
         {/* Reviews */}
-        <RatingStars rating={4} count={product.reviews?.totalDocs || 0} />
+        <RatingStars rating={'4'} count={product.reviews?.length || 0} />
 
         {/* Price Section */}
         <div className="flex items-center space-x-4 mb-4">
           <p className="text-2xl text-savoy-accent-orange">${product.price}</p>
-          {savings > 0 ? (
+          {product.savings > 0 ? (
             <>
               <span className="text-xl opacity-50 line-through">${product.pricePrevious}</span>
               <span className=" bg-savoy-accent-orange  text-white px-3 py-1 rounded-full text-sm">
-                Save ${savings.toFixed(2)}
+                Save {product.savingsFormatted}
               </span>
             </>
           ) : null}
@@ -85,6 +75,13 @@ export default async function ProductDetailsPage({
           </div>
         </div>
       </div>
+
+      {product.reviews && (
+        <div className="col col-span-2 mt-16 mb-2">
+          <h1 className="text-3xl uppercase tracking-wide mb-2">User Reviews</h1>
+          <ProductReviews reviews={product.reviews} />
+        </div>
+      )}
     </main>
   )
 }

@@ -1,6 +1,8 @@
+import { Review } from '@/payload-types'
+
 interface RatingStarsProps {
-  rating: number
-  count: number
+  rating: Review['rating']
+  count?: number
 }
 
 export const RatingStars = ({ rating, count }: RatingStarsProps) => {
@@ -10,7 +12,7 @@ export const RatingStars = ({ rating, count }: RatingStarsProps) => {
         {[...Array(5)].map((_, index) => (
           <svg
             key={index}
-            className={`w-5 h-5 ${index < rating ? 'text-savoy-accent-orange' : 'text-gray-200'}`}
+            className={`w-5 h-5 ${index < parseInt(rating) ? 'text-savoy-accent-orange' : 'text-gray-200'}`}
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -19,7 +21,7 @@ export const RatingStars = ({ rating, count }: RatingStarsProps) => {
           </svg>
         ))}
       </div>
-      <span>by {count} users</span>
+      {count && <span>by {count} users</span>}
     </div>
   )
 }

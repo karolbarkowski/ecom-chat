@@ -2,7 +2,6 @@
 
 import { draftMode, headers } from 'next/headers'
 import { getPayload } from 'payload'
-import { cache } from 'react'
 import { LivePreviewListener } from '@/components/Payload/LivePreviewListener'
 import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
@@ -10,8 +9,9 @@ import NotFound from '../../not-found'
 
 import type { Metadata } from 'next'
 import { RichText } from '@/components/RichText'
-import { PostComment } from '@/payload-types'
 import { PostsService } from '@/payload/collections/Posts/PostsService'
+import { PostComments } from '../_components/PostComments/PostComments'
+import { dateToFormattedString } from '@/utilities/text-format'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -57,10 +57,6 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   const imgUrl = typeof post.heroImage === 'string' ? post.heroImage : post.heroImage?.url
   const author = typeof post.author === 'object' ? post.author?.name : ''
-  const publicationDate =
-    typeof post.publishedAt === 'string'
-      ? new Date(post.publishedAt).toLocaleDateString('en-GB').replace(/\//g, '.')
-      : ''
 
   return (
     <article className="pb-16">
@@ -76,35 +72,13 @@ export default async function Post({ params: paramsPromise }: Args) {
           </h1>
 
           <div className="text-xs uppercase tracking-[0.2em]">
-            By {author?.toString()} on {publicationDate}
+            By {author?.toString()} on {dateToFormattedString(post.publishedAt)}
           </div>
         </div>
 
         <RichText data={post.content} enableGutter={false} enableProse={false} />
 
-        {post.comments && post.comments.length > 0 && (
-          <div className="mt-32">
-            <h1 className="text-xl uppercase tracking-logo mb-2 text-center">
-              {post.comments.length} replies to "{post.title}"
-            </h1>
-
-            <div className="space-y-6 divide-y divide-savoy-border">
-              {post.comments
-                .filter((comment): comment is PostComment => typeof comment === 'object')
-                .map((comment, index) => {
-                  const userName =
-                    typeof comment.user === 'object' ? comment.user.email : comment.user
-                  return (
-                    <div key={index} className=" py-4 ">
-                      <h3 className="text-md uppercase">{userName}</h3>
-                      <p className="text-xs text-savoy-text-light">{comment.createdAt}</p>
-                      <p className="text-xsmtext-savoy-text mt-2">{comment.content}</p>
-                    </div>
-                  )
-                })}
-            </div>
-          </div>
-        )}
+        <PostComments comments={post.comments || []} postTitle={post.title} />
       </div>
     </article>
   )

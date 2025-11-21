@@ -199,7 +199,6 @@ export interface Review {
   rating: '1' | '2' | '3' | '4' | '5';
   content: string;
   user: string | User;
-  product: string | Product;
   updatedAt: string;
   createdAt: string;
 }
@@ -602,7 +601,6 @@ export interface ReviewsSelect<T extends boolean = true> {
   rating?: T;
   content?: T;
   user?: T;
-  product?: T;
   updatedAt?: T;
   createdAt?: T;
 }

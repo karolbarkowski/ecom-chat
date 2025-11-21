@@ -14,6 +14,7 @@ import { Users } from './payload/collections/Users'
 import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImportsAdmin'
 import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
 import { PostComments } from './payload/collections/Posts/PostComments'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,6 +56,18 @@ export default buildConfig({
     locales: ['en', 'pl', 'no'],
     defaultLocale: 'en',
   },
+  email: nodemailerAdapter({
+    defaultFromAddress: 'info@payloadcms.com',
+    defaultFromName: 'Payload',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
   collections: [Users, Products, ProductReviews, Media, Posts, PostComments],
   globals: [ProductImportsAdmin, EmbeddingsAdmin],
   // This config helps us configure global or default features that the other editors can inherit

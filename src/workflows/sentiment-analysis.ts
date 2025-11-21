@@ -1,15 +1,18 @@
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import { sendNegativeCommentNotification } from './../emails/send-negative-comment-notification'
 
-export async function sentimentAnalysis(content: string): Promise<1 | 0 | -1> {
-  const payload = await getPayload({ config: configPromise })
-
-  await payload.sendEmail({
-    to: 'karol.barkowski@gmail.com',
-    subject: 'Test Email',
-    text: 'This is a test email from Payload CMS!',
-    html: '<p>This is a <strong>test email</strong> from Payload CMS!</p>',
-  })
+export async function sentimentAnalysis(
+  commentId: string,
+  commentContent: string,
+): Promise<1 | 0 | -1> {
+  // For simplicity, let's assume any comment containing the word "bad" is negative
+  if (commentContent.toLowerCase().includes('bad')) {
+    // Send notification for negative comment
+    await sendNegativeCommentNotification({
+      commentContent,
+      commentId,
+    })
+    return -1
+  }
 
   return 1
 }

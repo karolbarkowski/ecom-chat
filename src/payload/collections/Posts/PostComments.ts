@@ -11,7 +11,7 @@ export const PostComments: CollectionConfig = {
     update: anyone,
   },
   hooks: {
-    beforeChange: [analyzeSentiment],
+    afterChange: [analyzeSentiment],
   },
   admin: {
     useAsTitle: 'content',

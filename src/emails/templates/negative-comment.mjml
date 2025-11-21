@@ -1,0 +1,54 @@
+<mjml>
+  <mj-head>
+    <mj-title>Negative Comment Detected</mj-title>
+    <mj-preview>A negative comment has been detected on your website</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="'Unna', Georgia, serif" />
+      <mj-text font-size="13px" color="#2D2D2D" line-height="1.5" />
+      <mj-section background-color="#FFFFFF" padding="0" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .accent { color: #D4A574; }
+      .text-light { color: #808080; }
+      .text-lighter { color: #999999; }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+
+    <!-- Main Content -->
+    <mj-section background-color="#FFFFFF" padding="20px">
+      <mj-column>
+        <!-- Alert Badge -->
+        <mj-text align="center" padding-bottom="16px">
+          <span style="background-color: #FEF2F2; color: #DC2626; padding: 6px 16px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">
+            Negative Sentiment
+          </span>
+        </mj-text>
+
+        <!-- Description -->
+        <mj-text align="center" css-class="text-light">
+          A comment with negative sentiment has been posted on your website and requires your attention.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Comment Details Card -->
+    <mj-section background-color="#F5F5F5" padding="12px">
+      <mj-column>
+        <mj-text font-size="13px" line-height="1.625" padding="0">
+          "{{commentContent}}"
+        </mj-text>
+      </mj-column>
+
+    </mj-section>
+
+    <!-- Action Button -->
+    <mj-section background-color="#FFFFFF" padding="0 20px 40px">
+      <mj-column>
+        <mj-button background-color="#2D2D2D" color="#FFFFFF" font-size="13px" font-weight="400" letter-spacing="0.1em" text-transform="uppercase" border-radius="2px" padding="12px 32px" href="{{moderationLink}}">
+          Review Comment
+        </mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { analyzeSentiment } from './hooks/analyzeSentiment'
+import { reviewAfterChange } from './hooks/review-afterChange'
 
 export const ProductReviews: CollectionConfig = {
   slug: 'reviews',
@@ -8,7 +8,7 @@ export const ProductReviews: CollectionConfig = {
     defaultColumns: ['rating', 'user', 'product', 'createdAt'],
   },
   hooks: {
-    afterChange: [analyzeSentiment],
+    afterChange: [reviewAfterChange],
   },
   fields: [
     {

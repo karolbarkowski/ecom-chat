@@ -2,9 +2,12 @@ import type { CollectionAfterChangeHook } from 'payload'
 import { sentimentAnalysis } from '@/workflows/sentiment-analysis'
 import type { Review } from '../../../../payload-types'
 
-export const analyzeSentiment: CollectionAfterChangeHook<Review> = async ({ doc, req }) => {
+export const reviewAfterChange: CollectionAfterChangeHook<Review> = async ({ doc, req }) => {
   // Fire and forget - don't block the response
   if (doc.id && doc.content) {
+    //update product rating based on updated review rating
+
+    //perform sentiment analysis
     sentimentAnalysis(doc.id, doc.content)
       .then(async (sentiment) => {
         // Direct MongoDB update to bypass hooks and prevent infinite loop

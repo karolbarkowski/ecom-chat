@@ -1,10 +1,14 @@
 import { CollectionConfig } from 'payload'
+import { analyzeSentiment } from './hooks/analyzeSentiment'
 
 export const ProductReviews: CollectionConfig = {
   slug: 'reviews',
   admin: {
     useAsTitle: 'rating',
     defaultColumns: ['rating', 'user', 'product', 'createdAt'],
+  },
+  hooks: {
+    afterChange: [analyzeSentiment],
   },
   fields: [
     {
@@ -29,6 +33,20 @@ export const ProductReviews: CollectionConfig = {
       type: 'relationship',
       relationTo: 'users',
       required: true,
+    },
+    {
+      name: 'sentiment',
+      type: 'select',
+      required: false,
+      options: [
+        { label: 'positive', value: '1' },
+        { label: 'neutral', value: '0' },
+        { label: 'negative', value: '-1' },
+      ],
+      admin: {
+        disabled: true,
+        readOnly: true,
+      },
     },
   ],
 }

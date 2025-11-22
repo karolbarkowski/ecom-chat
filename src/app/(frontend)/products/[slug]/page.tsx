@@ -35,10 +35,7 @@ export default async function ProductDetailsPage({
           <p className="text-lg">by {product.manufacturer}</p>
         </div>
 
-        {/* <RatingStars rating={Math.round(product.ratingAverage).toString()} count={1} /> */}
-        <span>
-          {product.ratingAverage} by {product.ratingsCount} users
-        </span>
+        <RatingStars rating={product.ratingAverage} count={1} />
 
         {/* Price Section */}
         <div className="flex items-center space-x-4 mb-4">

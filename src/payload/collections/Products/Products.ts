@@ -80,7 +80,18 @@ export const Products: CollectionConfig = {
           ],
         },
         {
-          label: 'AI',
+          label: 'Reviews',
+          fields: [
+            {
+              name: 'reviews',
+              type: 'join',
+              collection: 'reviews',
+              on: 'product',
+            },
+          ],
+        },
+        {
+          label: 'Vector Embedding',
           fields: [
             {
               name: 'embedding',
@@ -114,17 +125,6 @@ export const Products: CollectionConfig = {
       admin: {
         components: {
           Cell: '@/payload/collections/Products/components/ProductActionsCell',
-        },
-      },
-    },
-    {
-      name: 'rating-display',
-      type: 'ui',
-      admin: {
-        position: 'sidebar',
-        components: {
-          Field: '@/payload/collections/Products/components/RatingDisplayField',
-          Cell: '@/payload/collections/Products/components/RatingDisplayCell',
         },
       },
     },

@@ -78,7 +78,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
         <RichText data={post.content} enableGutter={false} enableProse={false} />
 
-        <PostComments comments={post.comments || []} postTitle={post.title} />
+        <PostComments comments={post.comments?.docs || []} postTitle={post.title} />
       </div>
     </article>
   )

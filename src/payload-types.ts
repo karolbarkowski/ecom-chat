@@ -79,7 +79,14 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    products: {
+      reviews: 'reviews';
+    };
+    posts: {
+      comments: 'post-comments';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
@@ -183,6 +190,11 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  reviews?: {
+    docs?: (string | Review)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   embedding?: number[] | null;
   category?: string | null;
   manufacturer?: string | null;
@@ -321,10 +333,11 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  /**
-   * Comments associated with this post
-   */
-  comments?: (string | PostComment)[] | null;
+  comments?: {
+    docs?: (string | PostComment)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   meta?: {
     title?: string | null;
     /**
@@ -358,6 +371,7 @@ export interface Post {
  */
 export interface PostComment {
   id: string;
+  post: string | Post;
   content: string;
   user: string | User;
   sentiment?: ('1' | '0' | '-1') | null;
@@ -589,6 +603,7 @@ export interface ProductsSelect<T extends boolean = true> {
         order?: T;
         id?: T;
       };
+  reviews?: T;
   embedding?: T;
   category?: T;
   manufacturer?: T;
@@ -746,6 +761,7 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "post-comments_select".
  */
 export interface PostCommentsSelect<T extends boolean = true> {
+  post?: T;
   content?: T;
   user?: T;
   sentiment?: T;

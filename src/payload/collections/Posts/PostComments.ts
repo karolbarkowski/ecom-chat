@@ -19,6 +19,15 @@ export const PostComments: CollectionConfig = {
   },
   fields: [
     {
+      name: 'post',
+      type: 'relationship',
+      relationTo: 'posts',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'content',
       type: 'textarea',
       required: true,

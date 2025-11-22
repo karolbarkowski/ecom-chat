@@ -81,15 +81,9 @@ export const Posts: CollectionConfig<'posts'> = {
           fields: [
             {
               name: 'comments',
-              type: 'relationship',
-              relationTo: 'post-comments',
-              hasMany: true,
-              admin: {
-                description: 'Comments associated with this post',
-                components: {
-                  Field: '/payload/fields/commentsTable/CommentsTableComponent',
-                },
-              },
+              type: 'join',
+              collection: 'post-comments',
+              on: 'post',
             },
           ],
         },

@@ -2,7 +2,15 @@
 'use client'
 import React, { useState } from 'react'
 import { ArrayFieldClientComponent } from 'payload'
-import { useFormFields, useForm, Button, FieldLabel, useField } from '@payloadcms/ui'
+import {
+  useFormFields,
+  useForm,
+  Button,
+  FieldLabel,
+  useField,
+  Drawer,
+  DrawerToggler,
+} from '@payloadcms/ui'
 import './index.scss'
 
 type MediaImageFormField = {
@@ -16,6 +24,7 @@ export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path })
   const { removeFieldRow, setModified } = useForm()
   const { dispatch } = useFormFields(([_, dispatch]) => ({ dispatch }))
   const [newImageUrl, setNewImageUrl] = useState('')
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const mediaImages = useFormFields(([fields]) => {
     if (!rows) return []
@@ -51,6 +60,14 @@ export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path })
     setModified(true)
   }
 
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl)
+  }
+
+  const handleRemoveBackground = () => {
+    console.log('Remove background clicked for image:', selectedImage)
+  }
+
   return (
     <div className="field-type slug-field-component">
       <div className="label-wrapper">
@@ -82,27 +99,48 @@ export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path })
         ) : (
           <div className="image-thumbnails">
             {mediaImages.map((image, index) => (
-              <div key={index} className="thumbnail-wrapper">
-                <img
-                  src={image.url}
-                  alt={`Product image ${index + 1}`}
-                  className="thumbnail-image"
-                />
-                <button
-                  className="remove-button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleRemoveImage(index)
-                  }}
-                  title="Remove image"
+              <DrawerToggler key={index} slug="image-preview">
+                <div
+                  className="thumbnail-wrapper"
+                  onClick={() => handleImageClick(image.url)}
+                  style={{ cursor: 'pointer' }}
                 >
-                  ×
-                </button>
-              </div>
+                  <img
+                    src={image.url}
+                    alt={`Product image ${index + 1}`}
+                    className="thumbnail-image"
+                  />
+                  <button
+                    className="remove-button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleRemoveImage(index)
+                    }}
+                    title="Remove image"
+                  >
+                    ×
+                  </button>
+                </div>
+              </DrawerToggler>
             ))}
           </div>
         )}
       </div>
+
+      <Drawer slug="image-preview" title="Image Preview">
+        {selectedImage && (
+          <div style={{ padding: '20px' }}>
+            <div style={{ marginBottom: '20px' }}>
+              <img
+                src={selectedImage}
+                alt="Preview"
+                style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+            <Button onClick={handleRemoveBackground}>Remove Background</Button>
+          </div>
+        )}
+      </Drawer>
     </div>
   )
 }

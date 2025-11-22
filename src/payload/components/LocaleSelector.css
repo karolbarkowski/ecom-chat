@@ -1,0 +1,41 @@
+.custom-locale-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.locale-flag-button {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locale-flag-button:hover {
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+
+.locale-flag-button.active {
+  opacity: 1;
+  border-color: var(--theme-success-500, #10b981);
+  box-shadow: 0 0 0 1px var(--theme-success-500, #10b981);
+}
+
+.locale-flag-button:focus {
+  outline: none;
+  border-color: var(--theme-elevation-500, #3b82f6);
+}
+
+/* Hide the default Payload locale selector */
+.localizer-button {
+  display: none !important;
+}

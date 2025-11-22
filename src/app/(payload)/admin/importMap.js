@@ -22,6 +22,7 @@ import { default as default_275aebf32bc29ec1eca2156482203bb0 } from '../../../pa
 import { default as default_fff1855176f029b6e6447c0d629b955f } from '@/payload/collections/Posts/components/SentimentCell'
 import { default as default_8c83f899c78d9551178e3f449e489937 } from '../../../payload/globals/ProductsImport/ImportsDefaultUI'
 import { default as default_5c6b49c57875e375d59f24a5c016327e } from '../../../payload/globals/ProductsVectorEmbeddings/DefaultUI'
+import { CustomLocaleSelector as CustomLocaleSelector_c86f1cfd8307bec621ebdb28e4f1dff8 } from '@/payload/components/LocaleSelector'
 
 export const importMap = {
   "@/payload/fields/mediaImageSelector/MediaImageSelectorComponent#MediaImageSelectorComponent": MediaImageSelectorComponent_112b276db35c5ad94763db6902dfc2df,
@@ -47,5 +48,6 @@ export const importMap = {
   "/payload/fields/tagsArray/tagsArrayComponent#default": default_275aebf32bc29ec1eca2156482203bb0,
   "@/payload/collections/Posts/components/SentimentCell#default": default_fff1855176f029b6e6447c0d629b955f,
   "/payload/globals/ProductsImport/ImportsDefaultUI#default": default_8c83f899c78d9551178e3f449e489937,
-  "/payload/globals/ProductsVectorEmbeddings/DefaultUI#default": default_5c6b49c57875e375d59f24a5c016327e
+  "/payload/globals/ProductsVectorEmbeddings/DefaultUI#default": default_5c6b49c57875e375d59f24a5c016327e,
+  "@/payload/components/LocaleSelector#CustomLocaleSelector": CustomLocaleSelector_c86f1cfd8307bec621ebdb28e4f1dff8
 }

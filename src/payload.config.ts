@@ -22,6 +22,9 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    components: {
+      actions: ['@/payload/components/LocaleSelector#CustomLocaleSelector'],
+    },
     autoLogin: {
       email: 'karol.barkowski@gmail.com',
       password: 'MKB1983!!',

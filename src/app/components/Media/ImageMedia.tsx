@@ -6,11 +6,20 @@ import NextImage from 'next/image'
 import React from 'react'
 import { cn } from '@/utilities/cn'
 import { getClientSideURL } from '@/utilities/getURL'
-import { cssVariables } from '../../../cssVariables'
 
 import type { MediaProps } from './types'
 
-const { breakpoints } = cssVariables
+// Keep these in sync with the CSS variables in your tailwind configuration
+const breakpoints = {
+  breakpoints: {
+    '3xl': 1920,
+    '2xl': 1536,
+    xl: 1280,
+    lg: 1024,
+    md: 768,
+    sm: 640,
+  },
+}
 
 // A base64 encoded image to use as a placeholder while the image is loading
 const placeholderBlur =

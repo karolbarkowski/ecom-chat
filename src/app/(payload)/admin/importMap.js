@@ -1,3 +1,4 @@
+import { LocalizedFieldDescription as LocalizedFieldDescription_d9d3ae69c05bd40796753c2cde1ed151 } from '@/payload/plugins/localizedFieldControls/FieldDescription'
 import { MediaImageSelectorComponent as MediaImageSelectorComponent_112b276db35c5ad94763db6902dfc2df } from '@/payload/fields/mediaImageSelector/MediaImageSelectorComponent'
 import { SlugComponent as SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997 } from '@/payload/fields/slug/SlugComponent'
 import { TranslationManagerComponent as TranslationManagerComponent_a291f983ca3934b3982284f871d098bf } from '@/payload/fields/translationManager/TranslationManagerComponent'
@@ -25,6 +26,7 @@ import { default as default_5c6b49c57875e375d59f24a5c016327e } from '../../../pa
 import { CustomLocaleSelector as CustomLocaleSelector_c86f1cfd8307bec621ebdb28e4f1dff8 } from '@/payload/components/LocaleSelector'
 
 export const importMap = {
+  "@/payload/plugins/localizedFieldControls/FieldDescription#LocalizedFieldDescription": LocalizedFieldDescription_d9d3ae69c05bd40796753c2cde1ed151,
   "@/payload/fields/mediaImageSelector/MediaImageSelectorComponent#MediaImageSelectorComponent": MediaImageSelectorComponent_112b276db35c5ad94763db6902dfc2df,
   "@/payload/fields/slug/SlugComponent#SlugComponent": SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997,
   "@/payload/fields/translationManager/TranslationManagerComponent#TranslationManagerComponent": TranslationManagerComponent_a291f983ca3934b3982284f871d098bf,

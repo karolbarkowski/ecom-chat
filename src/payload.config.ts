@@ -15,6 +15,7 @@ import { ProductImportsAdmin } from './payload/globals/ProductsImport/ProductImp
 import { EmbeddingsAdmin } from './payload/globals/ProductsVectorEmbeddings/Admin'
 import { PostComments } from './payload/collections/Posts/PostComments'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { localizedFieldControlsPlugin } from './payload/plugins/localizedFieldControls'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,6 +86,7 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    localizedFieldControlsPlugin(),
     // storage-adapter-placeholder
   ],
 })

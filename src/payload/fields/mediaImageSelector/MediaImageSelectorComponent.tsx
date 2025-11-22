@@ -110,7 +110,7 @@ export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path })
                     alt={`Product image ${index + 1}`}
                     className="thumbnail-image"
                   />
-                  <button
+                  <span
                     className="remove-button"
                     onClick={(e) => {
                       e.stopPropagation()
@@ -119,7 +119,7 @@ export const MediaImageSelectorComponent: ArrayFieldClientComponent = ({ path })
                     title="Remove image"
                   >
                     ×
-                  </button>
+                  </span>
                 </div>
               </DrawerToggler>
             ))}

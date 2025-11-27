@@ -5,6 +5,7 @@ import { LivePreviewListener } from '@/components/Payload/LivePreviewListener'
 import { Unna } from 'next/font/google'
 import { LayoutFooter } from './_components/Footer'
 import { LayoutHeader } from './_components/Header'
+import { SessionProvider } from '../providers/SessionProvider'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -28,17 +29,19 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
 
       <body className={`min-h-screen bg-savoy-bg text-savoy-text flex flex-col font-main`}>
-        <AdminBar />
-        <LivePreviewListener />
+        <SessionProvider>
+          <AdminBar />
+          <LivePreviewListener />
 
-        {/* Header gets its own container */}
-        <LayoutHeader />
+          {/* Header gets its own container */}
+          <LayoutHeader />
 
-        {/* Children render full-width, manage their own backgrounds and containers */}
-        <div className="flex-1">{children}</div>
+          {/* Children render full-width, manage their own backgrounds and containers */}
+          <div className="flex-1">{children}</div>
 
-        {/* Footer gets its own container */}
-        <LayoutFooter />
+          {/* Footer gets its own container */}
+          <LayoutFooter />
+        </SessionProvider>
       </body>
     </html>
   )

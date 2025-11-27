@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from 'react'
+import { UserProfile } from './UserProfile'
 
 export const LayoutHeader: React.FC = async () => {
   return (
@@ -38,6 +39,8 @@ export const LayoutHeader: React.FC = async () => {
             </li>
           </ul>
         </nav>
+
+        <UserProfile />
       </div>
     </header>
   )

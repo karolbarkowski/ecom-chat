@@ -3,6 +3,7 @@ import { MediaImageSelectorComponent as MediaImageSelectorComponent_112b276db35c
 import { SlugComponent as SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997 } from '@/payload/fields/slug/SlugComponent'
 import { TranslationManagerComponent as TranslationManagerComponent_a291f983ca3934b3982284f871d098bf } from '@/payload/fields/translationManager/TranslationManagerComponent'
 import { default as default_fcd9508f40593a3fb43cbd3dafc9bc5b } from '@/payload/collections/Products/components/ProductActionsCell'
+import { default as default_77112be0491292c6f361fc5f731069b3 } from '@/payload/components/RemoveBackgroundButton'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -31,6 +32,7 @@ export const importMap = {
   "@/payload/fields/slug/SlugComponent#SlugComponent": SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997,
   "@/payload/fields/translationManager/TranslationManagerComponent#TranslationManagerComponent": TranslationManagerComponent_a291f983ca3934b3982284f871d098bf,
   "@/payload/collections/Products/components/ProductActionsCell#default": default_fcd9508f40593a3fb43cbd3dafc9bc5b,
+  "@/payload/components/RemoveBackgroundButton#default": default_77112be0491292c6f361fc5f731069b3,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

@@ -23,6 +23,15 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
+      name: 'removeBackground',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/payload/components/RemoveBackgroundButton',
+        },
+      },
+    },
+    {
       name: 'alt',
       type: 'text',
       //required: true,

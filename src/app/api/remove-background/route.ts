@@ -1,5 +1,6 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import sharp from 'sharp'
 
 const AI_API_URL = process.env.AI_API_URL || 'http://localhost:8000'
 
@@ -17,11 +18,15 @@ export const POST = async (request: Request) => {
       return Response.json({ error: 'Failed to fetch image from URL' }, { status: 400 })
     }
 
-    const imageBlob = await imageResponse.blob()
+    const imageArrayBuffer = await imageResponse.arrayBuffer()
+    const imageBuffer = Buffer.from(imageArrayBuffer)
 
-    // 2. Send to AI-Api for background removal
+    // 2. Convert to PNG using Sharp (handles AVIF, WebP, etc.)
+    const pngBuffer = await sharp(imageBuffer).png().toBuffer()
+
+    // 3. Send to AI-Api for background removal
     const formData = new FormData()
-    formData.append('file', imageBlob, 'image.png')
+    formData.append('file', new Blob([pngBuffer], { type: 'image/png' }), 'image.png')
 
     const aiResponse = await fetch(`${AI_API_URL}/remove-background`, {
       method: 'POST',
@@ -38,7 +43,7 @@ export const POST = async (request: Request) => {
 
     const processedImageBlob = await aiResponse.blob()
 
-    // 3. Upload to Payload Media collection
+    // 4. Upload to Payload Media collection
     const payload = await getPayload({ config: configPromise })
 
     // Extract filename from URL or generate one
@@ -68,7 +73,7 @@ export const POST = async (request: Request) => {
       },
     })
 
-    // 4. Return the new media URL
+    // 5. Return the new media URL
     const mediaUrl = mediaDoc.url || `/media/${newFilename}`
 
     return Response.json({
